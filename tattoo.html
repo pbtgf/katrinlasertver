@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Удаление тату и татуажа — KATRIN_LASER</title>
+    <style>
+        /* --- Цветовая палитра (обновленная) --- */
+        :root {
+            --mint-light: #e3f0e9;
+            --mint-soft: #c1d5c9;
+            --mint-deep: #66CDAA;   /* Основной мятный цвет (кнопки) */
+            --mint-hover: #4A9E82;  /* Темный мятный при наведении */
+            --beige-bg: #faf7f2;    /* Бежевый фон сайта */
+            --beige-card: #f2ede4;
+            --grey-text: #4a4a4a;
+            --grey-light: #9b9b9b;
+            --white: #ffffff;
+            --accent: #66CDAA;      /* Акцентный цвет для иконок и полосок */
+            --shadow: 0 10px 30px rgba(110, 143, 126, 0.08);
+            --radius: 20px;
+            --font-main: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: var(--font-main);
+            background-color: var(--beige-bg);
+            color: var(--grey-text);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        a { text-decoration: none; color: inherit; }
+        img { max-width: 100%; display: block; }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* --- Шапка --- */
+        header {
+            padding: 10px 0;
+            position: sticky;
+            top: 0;
+            background-color: rgba(250, 247, 242, 0.92);
+            backdrop-filter: blur(10px);
+            z-index: 100;
+            border-bottom: 1px solid var(--mint-soft);
+        }
+
+        .header-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 24px;
+        }
+
+        .logo {
+            font-size: 1.2rem;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            color: #2c3e35;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo img { height: 45px; width: auto; object-fit: contain; }
+        .logo span { color: var(--mint-hover); font-weight: 400; }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 28px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+            white-space: nowrap;
+            text-align: center;
+        }
+
+        .btn-primary {
+            background-color: var(--mint-deep);
+            color: var(--white);
+            box-shadow: 0 4px 15px rgba(102, 205, 170, 0.3);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--mint-hover);
+            transform: translateY(-2px);
+        }
+
+        .btn-back {
+            background: transparent;
+            border: 1px solid var(--mint-soft);
+            color: var(--grey-text);
+        }
+
+        .btn-back:hover { background: var(--mint-light); }
+
+        /* --- Заголовок страницы --- */
+        .page-header { 
+            padding: 60px 0 20px; 
+            text-align: center; 
+        }
+        
+        h1 { 
+            font-size: clamp(2.2rem, 4vw, 3.2rem); 
+            font-weight: 400;
+            letter-spacing: -0.02em;
+            color: #2c3e35;
+            margin-bottom: 1rem;
+        }
+
+        .subtitle {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--mint-hover);
+            font-weight: 600;
+            margin-bottom: 0.8rem;
+        }
+
+        .lead-text {
+            max-width: 760px;
+            margin: 0 auto;
+            font-size: 1.1rem;
+            color: var(--grey-light);
+            text-align: center;
+        }
+
+        /* --- Разделитель --- */
+        .divider {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 50px 0;
+        }
+
+        .divider::before,
+        .divider::after {
+            content: "";
+            flex: 1;
+            height: 1px;
+            background-color: var(--mint-soft);
+        }
+
+        .divider-icon {
+            margin: 0 20px;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: var(--mint-deep);
+            box-shadow: 0 0 0 4px var(--mint-light);
+        }
+
+        /* --- Контент --- */
+        .content-section {
+            max-width: 860px;
+            margin: 0 auto;
+        }
+
+        .info-card {
+            background: var(--white);
+            border-radius: var(--radius);
+            padding: 40px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--mint-soft);
+            margin-bottom: 32px;
+        }
+
+        .info-card h2 {
+            font-size: 1.5rem;
+            font-weight: 500;
+            color: #2c3e35;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .info-card p {
+            font-size: 1.05rem;
+            color: var(--grey-text);
+            margin-bottom: 16px;
+        }
+
+        .info-card p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* Иконки */
+        .icon-badge {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 32px;
+            height: 32px;
+            color: var(--mint-deep); /* Мятный цвет иконок */
+            flex-shrink: 0;
+        }
+        
+        .icon-badge svg {
+            width: 100%;
+            height: 100%;
+        }
+
+        /* Акцентные блоки */
+        .highlight-box {
+            background: var(--mint-light);
+            border-left: 4px solid var(--mint-deep);
+            padding: 20px 24px;
+            border-radius: 0 12px 12px 0;
+            margin: 24px 0;
+            font-size: 1.05rem;
+            color: #3d4f45;
+        }
+
+        .highlight-box strong {
+            color: var(--mint-hover);
+        }
+
+        .info-list {
+            list-style: none;
+            margin-top: 16px;
+        }
+
+        .info-list li {
+            position: relative;
+            padding-left: 28px;
+            margin-bottom: 12px;
+            font-size: 1.05rem;
+        }
+
+        .info-list li::before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            top: 0;
+            color: var(--mint-deep);
+            font-weight: bold;
+            font-size: 1.4rem;
+            line-height: 1.2;
+        }
+
+        /* --- Кнопка наверх --- */
+        .scroll-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background-color: var(--mint-deep);
+            color: var(--white);
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(102, 205, 170, 0.4);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px);
+            transition: all 0.3s ease;
+            z-index: 999;
+        }
+
+        .scroll-to-top.show {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .scroll-to-top:hover {
+            background-color: var(--mint-hover);
+            transform: translateY(-4px);
+        }
+
+        /* --- Футер --- */
+        footer {
+            padding: 40px 0;
+            border-top: 1px solid var(--mint-soft);
+            text-align: center;
+            font-size: 0.85rem;
+            color: var(--grey-light);
+            margin-top: 60px;
+        }
+
+        /* --- Адаптив --- */
+        @media (max-width: 768px) {
+            .info-card { padding: 24px; }
+            .info-card h2 { font-size: 1.3rem; }
+            .highlight-box { padding: 16px; }
+        }
+
+        @media (max-width: 600px) {
+            .header-inner { flex-wrap: wrap; gap: 12px; }
+            .logo { font-size: 1rem; gap: 8px; }
+            .logo img { height: 35px; }
+            .btn { padding: 10px 18px; font-size: 0.82rem; }
+            .scroll-to-top { bottom: 20px; right: 20px; width: 42px; height: 42px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Шапка -->
+    <header>
+        <div class="container header-inner">
+            <a href="index.html" class="logo">
+                <img src="images/logo.png" alt="Логотип KATRIN_LASER">
+                KATRIN<span>_LASER</span>
+            </a>
+            <div style="display: flex; gap: 20px;">
+                <a href="index.html" class="btn btn-back">← На главную</a>
+                <a href="https://vk.me/katrin__laser_tver" target="_blank" rel="noopener" class="btn btn-primary">Записаться</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Заголовок страницы -->
+    <section class="page-header container">
+        <div class="subtitle">Услуга</div>
+        <h1>Лазерное удаление татуировок и татуажа</h1>
+        <p class="lead-text">
+            Современный, безопасный и эффективный способ навсегда избавиться от надоевшего рисунка. Процедура проходит комфортно, а уже через сутки вы сможете вернуться к привычному образу жизни.
+        </p>
+    </section>
+
+    <!-- Контент -->
+    <section class="container">
+        <div class="content-section">
+
+            <!-- Блок 1: Как это работает -->
+            <div class="info-card">
+                <h2>
+                    <span class="icon-badge">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="3"></circle>
+                            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+                        </svg>
+                    </span>
+                    Как это работает?
+                </h2>
+                <p>
+                    Чернила слишком крупные, чтобы организм вывел их сам. Лазер разбивает пигмент на микрочастицы, которые иммунная система безопасно выводит естественным путем.
+                </p>
+                <div class="highlight-box">
+                    Лазер действует точечно — <strong>только на чернила, не повреждая здоровую кожу вокруг</strong>.
+                </div>
+            </div>
+
+            <!-- Блок 2: Сколько нужно процедур -->
+            <div class="info-card">
+                <h2>
+                    <span class="icon-badge">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                            <line x1="16" y1="2" x2="16" y2="6"></line>
+                            <line x1="8" y1="2" x2="8" y2="6"></line>
+                            <line x1="3" y1="10" x2="21" y2="10"></line>
+                        </svg>
+                    </span>
+                    Сколько нужно процедур?
+                </h2>
+                <p>
+                    Татуировка светлеет после каждого сеанса. Для полного удаления обычно требуется <strong>от 4 до 15 процедур</strong> с интервалом 1,5–2 месяца. 
+                </p>
+                <p>
+                    Точное количество зависит от глубины, цвета и давности нанесения.
+                </p>
+            </div>
+
+            <!-- Блок 3: Это больно -->
+            <div class="info-card">
+                <h2>
+                    <span class="icon-badge">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <path d="M8 14s1.5 2 4 2 4-2 4-2"></path>
+                            <line x1="9" y1="9" x2="9.01" y2="9"></line>
+                            <line x1="15" y1="9" x2="15.01" y2="9"></line>
+                        </svg>
+                    </span>
+                    Это больно?
+                </h2>
+                <p>
+                    Ощущения индивидуальны — от сравнимых с нанесением тату до легкого «щелчка резинкой». Перед сеансом мы наносим обезболивающий крем, а после — даем рекомендации по уходу.
+                </p>
+                <p>
+                    Легкая отечность и покраснение — нормальная реакция, которая быстро проходит.
+                </p>
+            </div>
+
+            <!-- Разделитель -->
+            <div class="divider">
+                <div class="divider-icon"></div>
+            </div>
+
+            <!-- Блок 4: Подготовка -->
+            <div class="info-card">
+                <h2>
+                    <span class="icon-badge">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+                            <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+                        </svg>
+                    </span>
+                    Как проходит подготовка?
+                </h2>
+                <p>На первой консультации мы оценим:</p>
+                <ul class="info-list">
+                    <li>Давность и глубину татуировки</li>
+                    <li>Цвет и тип чернил</li>
+                    <li>Наличие предыдущих попыток удаления</li>
+                    <li>Локацию на теле</li>
+                </ul>
+                <p style="margin-top: 20px;">
+                    Обязательно делаем фото «до» — чтобы отслеживать прогресс.
+                </p>
+            </div>
+
+            <!-- Блок 5: Важно знать -->
+            <div class="info-card" style="border-color: var(--mint-deep); background: #fdfdfd;">
+                <h2>
+                    <span class="icon-badge">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path>
+                            <line x1="12" y1="9" x2="12" y2="13"></line>
+                            <line x1="12" y1="17" x2="12.01" y2="17"></line>
+                        </svg>
+                    </span>
+                    Важно знать перед сеансом:
+                </h2>
+                <ul class="info-list">
+                    <li>На процедуру надеваются защитные очки</li>
+                    <li>Лучше прийти без макияжа глаз и линз</li>
+                    <li>Строго соблюдать правила ухода после каждого сеанса</li>
+                </ul>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Призыв к действию -->
+    <section class="container" style="text-align: center; margin: 60px auto;">
+        <h2 style="font-size: 1.8rem; margin-bottom: 20px; color: #2c3e35;">Начните путь к чистой коже</h2>
+        <p style="color: var(--grey-light); margin-bottom: 30px; max-width: 500px; margin-left: auto; margin-right: auto;">
+            Запишитесь на консультацию, и мы подберем индивидуальный план удаления.
+        </p>
+        <a href="https://vk.me/katrin__laser_tver" target="_blank" rel="noopener" class="btn btn-primary" style="padding: 16px 40px; font-size: 1rem;">Записаться онлайн</a>
+    </section>
+
+    <!-- Футер -->
+    <footer>
+        <div class="container">
+            <p>© 2025 KATRIN_LASER · Студия эпиляции в Твери</p>
+        </div>
+    </footer>
+
+    <!-- Кнопка Наверх -->
+    <button id="scrollToTopBtn" class="scroll-to-top" aria-label="Наверх">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 19V5M12 5L5 12M12 5L19 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+    </button>
+
+    <!-- Скрипт для кнопки Наверх -->
+    <script>
+        const scrollToTopBtn = document.getElementById('scrollToTopBtn');
+        
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                scrollToTopBtn.classList.add('show');
+            } else {
+                scrollToTopBtn.classList.remove('show');
+            }
+        });
+
+        scrollToTopBtn.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+    </script>
+
+</body>
+</html>

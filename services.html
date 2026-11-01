@@ -1,0 +1,983 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Услуги — KATRIN_LASER</title>
+     <style>
+        /* --- Цветовая палитра (обновленная) --- */
+        :root {
+            --mint-light: #e3f0e9;
+            --mint-soft: #c1d5c9;
+            --mint-deep: #66CDAA;   /* Основной мятный цвет (кнопки) */
+            --mint-hover: #4A9E82;  /* Темный мятный при наведении */
+            --beige-bg: #faf7f2;    /* Бежевый фон сайта */
+            --beige-card: #f2ede4;
+            --grey-text: #4a4a4a;
+            --grey-light: #9b9b9b;
+            --white: #ffffff;
+            --accent: #66CDAA;      /* Акцентный цвет для иконок, полосок и т.д. */
+            --shadow: 0 10px 30px rgba(110, 143, 126, 0.08);
+            --radius: 20px;
+            --font-main: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: var(--font-main);
+            background-color: var(--beige-bg);
+            color: var(--grey-text);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        a { text-decoration: none; color: inherit; }
+        img { max-width: 100%; display: block; }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        h1, h2, h3 { font-weight: 400; letter-spacing: -0.02em; color: #2c3e35; }
+        h1 { font-size: clamp(2.4rem, 5vw, 3.8rem); line-height: 1.15; margin-bottom: 1.5rem; }
+        h2 { font-size: clamp(1.8rem, 3vw, 2.4rem); margin-bottom: 1.5rem; }
+
+        .subtitle {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--mint-hover);
+            font-weight: 600;
+            margin-bottom: 0.8rem;
+        }
+
+        /* Шапка */
+        header {
+            padding: 10px 0;
+            position: sticky;
+            top: 0;
+            background-color: rgba(250, 247, 242, 0.92);
+            backdrop-filter: blur(10px);
+            z-index: 100;
+            border-bottom: 1px solid var(--mint-soft);
+        }
+
+        .header-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 24px;
+        }
+
+        .logo { 
+            font-size: 1.2rem; 
+            font-weight: 600; 
+            letter-spacing: 0.05em; 
+            color: #2c3e35; 
+            display: flex; 
+            align-items: center; 
+            gap: 10px;
+        }
+
+        .logo img {
+            height: 45px;
+            width: auto;
+            object-fit: contain;
+        }
+
+        .logo span { 
+            color: var(--mint-hover); 
+            font-weight: 400; 
+        }
+
+        .header-right { display: flex; align-items: center; gap: 20px; }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 28px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+            white-space: nowrap;
+            text-align: center;
+        }
+
+        /* Измененный цвет основных кнопок */
+        .btn-primary {
+            background-color: var(--mint-deep);
+            color: var(--white);
+            box-shadow: 0 4px 15px rgba(102, 205, 170, 0.3);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--mint-hover);
+            transform: translateY(-2px);
+        }
+
+        .btn-back {
+            background: transparent;
+            border: 1px solid var(--mint-soft);
+            color: var(--grey-text);
+        }
+
+        .btn-back:hover { background: var(--mint-light); }
+
+        .btn-detail {
+            background: transparent;
+            border: 1px solid var(--mint-deep);
+            color: var(--mint-hover);
+        }
+
+        .btn-detail:hover { background: var(--mint-light); }
+
+        /* Заголовок */
+        .page-header { padding: 60px 0 40px; text-align: center; }
+        .page-header p {
+            max-width: 640px;
+            margin: 0 auto;
+            color: var(--grey-light);
+            font-size: 1.05rem;
+        }
+
+        /* Сетка */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+            gap: 32px;
+            padding: 20px 0 60px;
+            grid-auto-rows: 1fr;
+        }
+
+        .service-card {
+            background: var(--white);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            border: 1px solid var(--mint-soft);
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            height: 100%;
+        }
+
+        .service-card:hover { 
+            transform: translateY(-4px); 
+            z-index: 10; 
+        }
+
+        .service-card:has(details[open]) {
+            z-index: 20;
+        }
+
+        .service-image {
+            height: 200px;
+            background: linear-gradient(135deg, var(--mint-light) 0%, var(--beige-card) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            border-radius: var(--radius) var(--radius) 0 0;
+            flex-shrink: 0;
+        }
+        
+        .service-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .service-body {
+            padding: 28px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+            background: var(--white);
+            border-radius: 0 0 var(--radius) var(--radius);
+            position: relative;
+        }
+
+        .service-body h3 { font-size: 1.3rem; margin-bottom: 10px; font-weight: 500; }
+
+        .service-desc {
+            font-size: 0.9rem;
+            color: var(--grey-light);
+            margin-bottom: 20px;
+            flex-grow: 1;
+            line-height: 1.55;
+        }
+
+        /* --- СТИЛИ ДЛЯ ВЫПАДАЮЩЕГО СПИСКА --- */
+        .service-details summary {
+            cursor: pointer;
+            color: var(--mint-hover);
+            font-weight: 600;
+            padding: 8px 0;
+            outline: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            user-select: none;
+            position: relative;
+            z-index: 2;
+        }
+
+        .service-details summary::-webkit-details-marker {
+            display: none;
+        }
+
+        .service-details summary::before {
+            content: "▶";
+            font-size: 0.7em;
+            transition: transform 0.3s ease;
+            color: var(--mint-deep);
+        }
+
+        .service-details[open] summary::before {
+            transform: rotate(90deg);
+        }
+
+        .service-details summary:hover {
+            color: var(--mint-deep);
+        }
+
+        /* Текст выпадает поверх нижних карточек */
+        .details-content {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100%;
+            background: var(--white);
+            padding: 10px 28px 28px 48px;
+            border-radius: 0 0 var(--radius) var(--radius);
+            box-shadow: 0 20px 30px rgba(110, 143, 126, 0.15);
+            border: 1px solid var(--mint-soft);
+            border-top: none;
+            z-index: 30;
+            max-height: 400px;
+            overflow-y: auto;
+            color: var(--grey-text);
+            line-height: 1.5;
+        }
+
+        .details-content p { margin-bottom: 10px; }
+        .details-content ul { margin-bottom: 15px; padding-left: 15px; }
+        .details-content li { margin-bottom: 5px; position: relative; }
+        .details-content li::before {
+            content: "•";
+            color: var(--mint-deep);
+            position: absolute;
+            left: -15px;
+        }
+
+        /* Цена и кнопка */
+        .service-price {
+            display: flex;
+            align-items: baseline;
+            gap: 10px;
+            margin-top: auto;
+            margin-bottom: 20px;
+            padding-top: 16px;
+            border-top: 1px solid var(--mint-soft);
+        }
+
+        .price-label {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--mint-hover);
+            font-weight: 600;
+            margin-right: 4px;
+        }
+
+        .price-value { 
+            font-size: 1.4rem; 
+            font-weight: 600; 
+            color: var(--mint-hover); 
+        }
+        
+        .price-note { 
+            font-size: 0.75rem; 
+            color: var(--grey-light); 
+            margin-left: auto; 
+        }
+
+        /* Кнопка */
+        .service-cta { 
+            margin-top: 0; 
+            display: flex; 
+            gap: 10px; 
+        }
+        
+        .service-cta .btn { 
+            flex: 1; 
+            padding: 12px; 
+            font-size: 0.85rem; 
+        }
+
+        /* Инфо-баннер */
+        .info-banner {
+            background: var(--mint-light);
+            border-radius: var(--radius);
+            padding: 32px 36px;
+            margin-bottom: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 24px;
+            flex-wrap: wrap;
+            border: 1px solid var(--mint-soft);
+        }
+
+        .info-banner p { font-size: 1rem; color: #3d4f45; max-width: 700px; }
+
+        /* Модальное окно */
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(44, 62, 53, 0.55);
+            backdrop-filter: blur(4px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+            z-index: 1000;
+        }
+
+        .modal-overlay.open {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal {
+            background: var(--white);
+            border-radius: var(--radius);
+            max-width: 720px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 30px 80px rgba(40, 60, 50, 0.3);
+            transform: translateY(16px) scale(0.98);
+            transition: transform 0.3s ease;
+            position: relative;
+        }
+
+        .modal-overlay.open .modal {
+            transform: translateY(0) scale(1);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 24px 28px 16px;
+            border-bottom: 1px solid var(--mint-soft);
+            position: sticky;
+            top: 0;
+            background: var(--white);
+            z-index: 2;
+            border-radius: var(--radius) var(--radius) 0 0;
+        }
+
+        .modal-header h3 { font-size: 1.3rem; font-weight: 500; }
+
+        .modal-close {
+            background: var(--mint-light);
+            border: none;
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            font-size: 1.1rem;
+            color: var(--mint-hover);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.2s ease;
+            flex-shrink: 0;
+        }
+
+        .modal-close:hover { background: var(--mint-soft); }
+
+        .modal-body { padding: 24px 28px 32px; }
+
+        /* Место под фото прайса */
+        .price-photo {
+            width: 100%;
+            min-height: 420px;
+            border-radius: 16px;
+            background: linear-gradient(135deg, var(--mint-light) 0%, var(--beige-card) 100%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: var(--mint-hover);
+            font-size: 0.95rem;
+            gap: 8px;
+            text-align: center;
+            padding: 24px;
+            border: 2px dashed var(--mint-soft);
+            overflow: hidden;
+        }
+
+        .price-photo img {
+            width: 100%;
+            height: auto;
+            border-radius: 12px;
+            object-fit: contain;
+        }
+
+        /* Стили для галереи внутри модального окна */
+        .price-gallery {
+            position: relative;
+            width: 100%;
+            border-radius: 16px;
+            overflow: hidden;
+            background: var(--mint-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 300px;
+        }
+
+        .gallery-img {
+            display: none;
+            width: 100%;
+            height: auto;
+            object-fit: contain;
+        }
+
+        .gallery-img.active {
+            display: block;
+        }
+
+        .gallery-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.8);
+            border: none;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            font-size: 1.2rem;
+            color: var(--mint-hover);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.3s, transform 0.2s;
+            z-index: 10;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        .gallery-btn:hover { background: rgba(255, 255, 255, 1); }
+        .gallery-prev { left: 16px; }
+        .gallery-next { right: 16px; }
+
+        .price-gallery.single-photo .gallery-btn { display: none; }
+
+        .modal-note {
+            margin-top: 20px;
+            font-size: 0.85rem;
+            color: var(--grey-light);
+            text-align: center;
+        }
+
+        footer {
+            padding: 40px 0;
+            border-top: 1px solid var(--mint-soft);
+            text-align: center;
+            font-size: 0.85rem;
+            color: var(--grey-light);
+        }
+
+        /* Кнопка наверх */
+        .scroll-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background-color: var(--mint-deep);
+            color: var(--white);
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(102, 205, 170, 0.4);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px);
+            transition: all 0.3s ease;
+            z-index: 999;
+        }
+
+        .scroll-to-top.show {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .scroll-to-top:hover {
+            background-color: var(--mint-hover);
+            transform: translateY(-4px);
+            box-shadow: 0 6px 20px rgba(74, 158, 130, 0.5);
+        }
+
+        /* --- АДАПТИВ --- */
+        @media (max-width: 700px) {
+            .services-grid { grid-template-columns: 1fr; }
+            .header-right { gap: 10px; }
+            .btn { padding: 10px 18px; font-size: 0.82rem; }
+            .info-banner { flex-direction: column; text-align: center; }
+            .service-cta { flex-direction: column; }
+            .price-photo { min-height: 300px; }
+            .scroll-to-top {
+                bottom: 20px;
+                right: 20px;
+                width: 42px;
+                height: 42px;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .header-inner {
+                flex-wrap: wrap;
+                gap: 12px;
+            }
+            .header-right {
+                gap: 12px;
+            }
+            .btn {
+                padding: 10px 18px;
+                font-size: 0.82rem;
+            }
+            .logo { font-size: 1rem; gap: 8px; }
+            .logo img { height: 35px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Шапка -->
+    <header>
+        <div class="container header-inner">
+            <a href="index.html" class="logo">
+    <img src="images/logo.png" alt="Логотип KATRIN_LASER">
+    KATRIN<span>_LASER</span>
+</a>
+            <div class="header-right">
+                <a href="index.html" class="btn btn-back">← На главную</a>
+                <a href="https://vk.me/katrin__laser_tver" target="_blank" rel="noopener" class="btn btn-primary">Записаться</a>
+            </div>
+        </div>
+
+
+    </header>
+
+    <!-- Заголовок -->
+    <section class="page-header container">
+        <div class="subtitle">Прайс-лист</div>
+        <h1>Услуги студии</h1>
+        <p>Актуальные цены уточняйте в сообществе ВКонтакте или по телефону.</p>
+    </section>
+
+    <!-- Инфо-баннер -->
+    <div class="container">
+        <div class="info-banner">
+            <p>Не нашли нужную зону или услугу? Напишите нам в VK — подскажем и подберём удобное время.</p>
+            <a href="https://vk.ru/katrin__laser_tver" target="_blank" rel="noopener" class="btn btn-primary">Написать в VK</a>
+        </div>
+    </div>
+
+    <!-- Сетка услуг -->
+    <section class="container">
+        <div class="services-grid">
+
+            <!-- 1. Удаление тату / татуажа -->
+<div class="service-card">
+    <div class="service-image">
+        <img src="images/tatu.jpg" alt="Удаление тату и татуажа лазером">
+    </div>
+    <div class="service-body">
+        <h3>Удаление тату / татуажа</h3>
+        
+        <!-- Начало блока с описанием -->
+        <details class="service-details">
+            <summary>Подробнее о процедуре</summary>
+            <div class="details-content">
+                <p>Лазерное удаление татуировок/татуажа — это современный, эффективный и безопасный способ. В руках грамотного специалиста процедура проходит быстро и максимально комфортно. Короткий восстановительный период и простые рекомендации по уходу за кожей позволяют клиенту уже через сутки вести привычный образ жизни.</p>
+
+                <p><strong>Как происходит удаление татуировки лазером?</strong></p>
+                <p>Гранулы чернил очень большие, и наша иммунная система не может сама от них избавиться. Поэтому татуировка держится в слоях кожи всю жизнь. Цель лазерного удаления тату — путём высокоинтенсивных импульсов разбить частицы чернил на более мелкие, чтобы иммунная система смогла безопасно удалить их из организма.</p>
+                <p>Во время процедуры мастер многократно подаёт импульс на область пигмента. Для маленьких татуировок требуется меньше импульсов, а для больших — больше. Лазер воздействует только на чернила, он не затрагивает и не повреждает кожу вокруг. Тем не менее в области пигмента коже необходимо время для восстановления и выведения чернил.</p>
+
+                <p><strong>Сколько процедур понадобится?</strong></p>
+                <p>После каждого сеанса татуировка становится светлее. Это небыстрый процесс, и для оптимального результата понадобится курс процедур с интервалом в 1,5–2 месяца. Согласно исследованиям, количество сеансов может быть от 4 до 15 и более при необходимости.</p>
+
+                <p><strong>Больно ли удалять татуировку лазером?</strong></p>
+                <p>Всё очень индивидуально. Некоторые люди говорят, что удаление ощущается так же, как нанесение татуировки, другие сравнивают это с ощущением, когда резинку щелкают по коже. До процедуры мастер нанесет вам местный обезболивающий крем, а после даст рекомендации по уходу за кожей. Отечность и изменение цвета кожи в области татуировки после процедуры является нормальным явлением, не стоит этого пугаться.</p>
+
+                <p><strong>Что влияет на результат удаления тату лазером?</strong></p>
+                <p>Перед первой процедурой мастер задаст несколько вопросов, чтобы выбрать оптимальный вариант работы. Например, важно понимать:</p>
+                <ul>
+                    <li>как давно была сделана татуировка;</li>
+                    <li>проводились ли ранее какие-либо процедуры по её удалению;</li>
+                    <li>татуировка была сделана любителем или профессионалом;</li>
+                    <li>какие чернила и какого цвета использовали;</li>
+                    <li>насколько глубоко проник пигмент;</li>
+                    <li>на какой области тела находится рисунок.</li>
+                </ul>
+                <p>Также необходимо сделать фото татуировки до процедуры. Это понадобится для отслеживания динамики выведения пигмента. После каждого сеанса татуировка должна становиться менее заметной. Во время сеанса клиент надевает непрозрачные защитные очки на глаза. Возможно, вам будет комфортнее не использовать макияж глаз и не надевать линзы в этот день. После каждого сеанса необходимо соблюдать правила по уходу за кожей.</p>
+
+                <p><strong>Удалит ли лазер татуировку полностью?</strong></p>
+                <p>Процесс удаления татуировки у каждого человека разный. Синие или черные татуировки хорошо поддаются лазерной обработке, поскольку они лучше поглощают свет. Здесь можно ожидать полного освобождения кожи от пигмента. Белые, жёлтые и красные чернила удалить значительно труднее.</p>
+
+                <p><strong>Как ухаживать за кожей после удаления татуировки?</strong></p>
+                <p>Хотя лазерное удаление татуировок довольно безопасно и имеет короткий восстановительный период, тем не менее некоторые рекомендации по уходу важно соблюдать:</p>
+                <ul>
+                    <li>Сразу после процедуры приложить пакет со льдом, чтобы успокоить обработанную область. Дома в течение 24 часов как можно чаще прикладывать холод (каждый час на 10 минут);</li>
+                    <li>при необходимости можно принять ибупрофен для уменьшения дискомфорта;</li>
+                    <li>не тереть, не чесать, не ковырять место обработки;</li>
+                    <li>можно принять душ на следующий день, но лучше избегать мытья пораженной области и тем более не тереть это место мочалкой;</li>
+                    <li>ежедневно наносить солнцезащитный крем на обработанную область, когда выходите на улицу;</li>
+                    <li>держать обработанный участок в чистоте;</li>
+                    <li>при необходимости ежедневно присылать фото мастеру для контроля процесса заживления.</li>
+                </ul>
+
+                <p><strong>Каковы риски и осложнения этой процедуры?</strong></p>
+                <p>Как и любая процедура, удаление татуировок сопряжено с потенциальными рисками, к которым относятся:</p>
+                <ul>
+                    <li>Рубцевание;</li>
+                    <li>Инфекции;</li>
+                    <li>Изменение цвета кожи;</li>
+                    <li>Раздражение кожи или сыпь;</li>
+                    <li>Боль или дискомфорт.</li>
+                </ul>
+                <p>Поэтому важно правильно ухаживать за кожей после процедуры, чтобы избежать негативных последствий.</p>
+            </div>
+        </details>
+        <!-- Конец блока с описанием -->
+
+        <div class="service-price">
+            <span class="price-label">Цена</span>
+            <span class="price-value">от 1 000 ₽</span>
+            <span class="price-note">уточняйте</span>
+        </div>
+        <div class="service-cta">
+            <a href="https://vk.me/katrin__laser_tver" target="_blank" rel="noopener" class="btn btn-primary">Записаться</a>
+        </div>
+    </div>
+</div>
+           <!-- 2. Карбоновый пилинг -->
+<div class="service-card">
+    <div class="service-image">
+        <img src="images/piling.jpg" alt="Карбоновый пилинг">
+    </div>
+    <div class="service-body">
+        <h3>Карбоновый пилинг</h3>
+        
+        <!-- Начало блока с описанием -->
+        <details class="service-details">
+            <summary>Описание процедуры</summary>
+            <div class="details-content">
+                <p><strong>✅ Современная косметологическая лазерная процедура для:</strong></p>
+                <ul>
+                    <li>очищения кожи</li>
+                    <li>сужения пор</li>
+                    <li>снижения выработки кожного сала</li>
+                    <li>коррекции акне и постакне</li>
+                    <li>улучшения цвета кожи, выравнивания тона</li>
+                    <li>уменьшения гиперкератоза</li>
+                    <li>повышения тонуса кожи и омоложения</li>
+                    <li>биостимулирующего действия</li>
+                </ul>
+
+                <p><strong>❌ Противопоказания:</strong></p>
+                <ul>
+                    <li>активный воспалительный процесс, свежее нарушение целостности кожного покрова (синяки, ссадины, царапины)</li>
+                    <li>агрессивный пилинг накануне</li>
+                    <li>новообразования кожи</li>
+                    <li>беременность и лактация</li>
+                    <li>аллергия на наногель с диоксидом углерода</li>
+                </ul>
+
+                <p>Идеально подходит для <strong>жирной и комбинированной кожи</strong>.</p>
+
+                <p><strong>Перед процедурой:</strong></p>
+                <ul>
+                    <li>не пользоваться декоративной косметикой</li>
+                    <li>не загорать</li>
+                </ul>
+                <p>Увлажнение и спф наносить можно.</p>
+
+                <p>После процедуры возможно самопроходящее местное покраснение на коже, небольшой румянец. Это нормальная реакция, которая пройдет в течение нескольких минут/часов. После процедуры обязательно использовать на обработанный участок солнцезащитный крем <strong>SPF 50+</strong>.</p>
+
+                <p><strong>Частота процедур:</strong></p>
+                <ul>
+                    <li>Акне/постакне — 1 раз в 7–10 дней</li>
+                    <li>Гиперкератоз — 1 раз в 10–14 дней</li>
+                    <li>Поддержание результата — 1 раз в 14–28 дней</li>
+                </ul>
+            </div>
+        </details>
+        <!-- Конец блока с описанием -->
+
+        <div class="service-price">
+            <span class="price-label">Цена</span>
+            <span class="price-value">1 500 ₽</span>
+            <span class="price-note">уточняйте</span>
+        </div>
+        <div class="service-cta">
+            <a href="https://vk.me/katrin__laser_tver" target="_blank" rel="noopener" class="btn btn-primary">Записаться</a>
+        </div>
+    </div>
+</div>
+
+                        <!-- 3. Прайс по зонам -->
+            <div class="service-card">
+                <div class="service-image">
+                    <img src="images/zona.jpg" alt="По зонам">
+                </div>
+                <div class="service-body">
+                    <h3>Прайс по зонам</h3>
+                    <p class="service-desc">
+                       
+Процедура лазерной эпиляции помогает сделать кожу гладкой, мягкой и ухоженной, а при прохождении курса гладкость остается с Вами надолго. Работаем бережно и комфортно, подбирая параметры индивидуально под тип кожи и волос. </p>
+                   
+                    <div class="service-price">
+                        <span class="price-label">Цены</span>
+                        <span class="price-value">по зонам</span>
+                    </div>
+                    <div class="service-cta">
+                        <button type="button" class="btn btn-detail" data-modal="modal-zones">Подробнее</button>
+                    </div>
+                </div>
+            </div>
+
+                        <!-- 4. Комплексы -->
+            <div class="service-card">
+                <div class="service-image">
+                    <img src="images/kompeks.jpg" alt="Комплексы">
+                </div>
+                <div class="service-body">
+                    <h3>Комплексы</h3>
+                    <p class="service-desc">
+                        Лазерная эпиляция — это современный и эффективный способ избавиться от нежелательных волос и забыть о ежедневном бритье и раздражении кожи.<br><br>
+                       А выбирая сразу комплекс процедур Вы значительно экономите!
+                    </p>
+                    <div class="service-price">
+                        <span class="price-label">Выгода</span>
+                        <span class="price-value">до 25%</span>
+                    </div>
+                    <div class="service-cta">
+                        <button type="button" class="btn btn-detail" data-modal="modal-complex">Подробнее</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 5. Мужчинам -->
+            <div class="service-card">
+                <div class="service-image">
+<img src="images/men.jpg" alt="По зонам"></div>
+
+                <div class="service-body">
+                    <h3>Мужчинам</h3>
+                    <p class="service-desc">
+                       Мужская лазерная эпиляция — это эффективное решение для удаления нежелательных волос и постоянного раздражения после бритья.
+
+Лазерная эпиляция для мужчин подходит для лица, шеи, подмышек, спины, груди, живота и зоны бикини. Параметры подбираются индивидуально с учётом типа кожи и плотности волос.
+
+                    </p>
+                    <div class="service-price">
+                        <span class="price-label">Цены</span>
+                        <span class="price-value">для мужчин</span>
+                    </div>
+                    <div class="service-cta">
+                        <button type="button" class="btn btn-detail" data-modal="modal-men">Подробнее</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Модальное окно: Прайс по зонам -->
+    <div class="modal-overlay" id="modal-zones" aria-hidden="true">
+        <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-zones-title">
+            <div class="modal-header">
+                <h3 id="modal-zones-title">Прайс по зонам</h3>
+                <button type="button" class="modal-close" aria-label="Закрыть">✕</button>
+            </div>
+            <div class="modal-body">
+                <div class="price-photo">
+    <img src="images/prisej.jpg" alt="Прайс по зонам">
+</div>
+                <p class="modal-note">Актуальные цены уточняйте у администратора или в сообществе ВКонтакте.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Модальное окно: Комплексы -->
+    <div class="modal-overlay" id="modal-complex" aria-hidden="true">
+        <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-complex-title">
+            <div class="modal-header">
+                <h3 id="modal-complex-title">Комплексы</h3>
+                <button type="button" class="modal-close" aria-label="Закрыть">✕</button>
+            </div>
+            <div class="modal-body">
+                <div class="price-photo">
+    <img src="images/prisek.jpg" alt="Прайс по зонам">
+</div>
+                <p class="modal-note">Актуальные цены уточняйте у администратора или в сообществе ВКонтакте.</p>
+            </div>
+        </div>
+    </div>
+
+       <!-- Модальное окно: Мужчинам -->
+    <div class="modal-overlay" id="modal-men" aria-hidden="true">
+        <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-men-title">
+            <div class="modal-header">
+                <h3 id="modal-men-title">Прайс для мужчин</h3>
+                <button type="button" class="modal-close" aria-label="Закрыть">✕</button>
+            </div>
+            <div class="modal-body">
+                <!-- Контейнер для галереи -->
+                <div class="price-gallery">
+                    <!-- Фотографии (добавьте столько, сколько нужно) -->
+                    <img src="images/men1.jpg" alt="Мужской прайс страница 1" class="gallery-img active">
+                    <img src="images/men2.jpg" alt="Мужской прайс страница 2" class="gallery-img">
+                    
+                    <!-- Стрелочки для пролистывания (появятся, только если фото больше одного) -->
+                    <button type="button" class="gallery-btn gallery-prev" aria-label="Предыдущее фото">❮</button>
+                    <button type="button" class="gallery-btn gallery-next" aria-label="Следующее фото">❯</button>
+                </div>
+                <p class="modal-note">Актуальные цены уточняйте у администратора или в сообществе ВКонтакте.</p>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>© 2025 KATRIN_LASER · Студия эпиляции в Твери</p>
+            <p style="margin-top: 8px; font-size: 0.75rem;">Цены и акции уточняйте в сообществе ВКонтакте.</p>
+        </div>
+    </footer>
+
+
+    <!-- Кнопка Наверх -->
+    <button id="scrollToTopBtn" class="scroll-to-top" aria-label="Наверх">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 19V5M12 5L5 12M12 5L19 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+    </button>
+
+
+    <script>
+        (function () {
+            const overlays = document.querySelectorAll('.modal-overlay');
+
+            function openModal(id) {
+                const overlay = document.getElementById(id);
+                if (!overlay) return;
+                overlay.classList.add('open');
+                overlay.setAttribute('aria-hidden', 'false');
+                document.body.style.overflow = 'hidden';
+            }
+
+            function closeModal(overlay) {
+                overlay.classList.remove('open');
+                overlay.setAttribute('aria-hidden', 'true');
+                document.body.style.overflow = '';
+            }
+
+            document.querySelectorAll('[data-modal]').forEach(function (btn) {
+                btn.addEventListener('click', function () {
+                    openModal(btn.getAttribute('data-modal'));
+                });
+            });
+
+            overlays.forEach(function (overlay) {
+                overlay.addEventListener('click', function (e) {
+                    if (e.target === overlay) closeModal(overlay);
+                });
+                const closeBtn = overlay.querySelector('.modal-close');
+                if (closeBtn) {
+                    closeBtn.addEventListener('click', function () {
+                        closeModal(overlay);
+                    });
+                }
+            });
+
+            document.addEventListener('keydown', function (e) {
+                if (e.key === 'Escape') {
+                    overlays.forEach(function (overlay) {
+                        if (overlay.classList.contains('open')) closeModal(overlay);
+                    });
+                }
+            });
+            // Логика галереи для мужского прайса
+            const gallery = document.querySelector('#modal-men .price-gallery');
+            if (gallery) {
+                const images = gallery.querySelectorAll('.gallery-img');
+                const prevBtn = gallery.querySelector('.gallery-prev');
+                const nextBtn = gallery.querySelector('.gallery-next');
+                let currentIndex = 0;
+
+                // Если фото одно или меньше — скрываем стрелочки
+                if (images.length <= 1) {
+                    gallery.classList.add('single-photo');
+                } else {
+                    function showImage(index) {
+                        images.forEach(img => img.classList.remove('active'));
+                        images[index].classList.add('active');
+                    }
+
+                    nextBtn.addEventListener('click', () => {
+                        currentIndex = (currentIndex + 1) % images.length;
+                        showImage(currentIndex);
+                    });
+
+                    prevBtn.addEventListener('click', () => {
+                        currentIndex = (currentIndex - 1 + images.length) % images.length;
+                        showImage(currentIndex);
+                    });
+                }
+            }
+        // Логика для кнопки Наверх
+        const scrollToTopBtn = document.getElementById('scrollToTopBtn');
+        
+        // Показываем кнопку при прокрутке вниз на 300px
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                scrollToTopBtn.classList.add('show');
+            } else {
+                scrollToTopBtn.classList.remove('show');
+            }
+        });
+
+        // Плавный скролл наверх при клике
+        scrollToTopBtn.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+   
+        })();
+    </script>
+  
+</body>
+</html>

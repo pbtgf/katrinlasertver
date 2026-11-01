@@ -1,0 +1,843 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KATRIN_LASER — Студия лазерной эпиляции в Твери</title>
+    <style>
+        /* --- Цветовая палитра: Мята / Беж / Серый --- */
+        :root {
+            --mint-light: #e3f0e9;  /* Светлый мятный для фонов */
+            --mint-soft: #c1d5c9;   /* Средний мятный для рамок */
+            --mint-deep: #66CDAA;   /* Новый мятный цвет кнопок */
+            --mint-hover: #4A9E82;  /* Темный мятный при наведении */
+            --beige-bg: #faf7f2;    /* Прежний бежевый фон сайта */
+            --beige-card: #f2ede4;  /* Прежний беж для карточек */
+            --grey-text: #4a4a4a;
+            --grey-light: #9b9b9b;
+            --white: #ffffff;
+            --shadow: 0 10px 30px rgba(110, 143, 126, 0.08);
+            --radius: 20px;
+            --font-main: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-main);
+            background-color: var(--beige-bg);
+            color: var(--grey-text);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        img {
+            max-width: 100%;
+            display: block;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* --- Анимация появления при скролле --- */
+        .fade-in-section {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+            will-change: opacity, transform;
+        }
+
+        .fade-in-section.is-visible {
+            opacity: 1;
+            transform: none;
+        }
+
+        /* --- Типографика --- */
+        h1, h2, h3 {
+            font-weight: 400;
+            letter-spacing: -0.02em;
+            color: #2c3e35;
+        }
+
+        h1 {
+            font-size: clamp(2.8rem, 6vw, 4.5rem);
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+        }
+
+        h2 {
+            font-size: clamp(2rem, 4vw, 3rem);
+            margin-bottom: 2rem;
+        }
+
+        .subtitle {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--mint-hover);
+            font-weight: 600;
+            margin-bottom: 0.8rem;
+        }
+
+        /* --- Кнопки --- */
+        .btn {
+            display: inline-block;
+            padding: 14px 36px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-primary {
+            background-color: var(--mint-deep);
+            color: var(--white);
+            box-shadow: 0 4px 15px rgba(102, 205, 170, 0.3);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--mint-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(74, 158, 130, 0.4);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 1px solid var(--mint-deep);
+            color: var(--mint-hover);
+        }
+
+        .btn-outline:hover {
+            background: var(--mint-light);
+            border-color: var(--mint-hover);
+        }
+
+        /* --- Шапка --- */
+        header {
+            padding: 10px 0;
+            position: sticky;
+            top: 0;
+            background-color: rgba(250, 247, 242, 0.92);
+            backdrop-filter: blur(10px);
+            z-index: 100;
+            border-bottom: 1px solid var(--mint-soft);
+        }
+
+        .header-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 24px;
+        }
+
+        .logo {
+            font-size: 1.2rem;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            color: #2c3e35;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-shrink: 0;
+        }
+
+        .logo img {
+            height: 45px;
+            width: auto;
+            object-fit: contain;
+        }
+
+        .logo span {
+            color: var(--mint-hover);
+            font-weight: 400;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 28px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 28px;
+            font-size: 0.9rem;
+            color: var(--grey-text);
+        }
+
+        .nav-links a:hover {
+            color: var(--mint-hover);
+        }
+
+        /* Выпадающее меню */
+        .dropdown {
+            position: relative;
+        }
+
+        .dropdown-toggle {
+            background: transparent;
+            border: 1px solid var(--mint-soft);
+            color: var(--grey-text);
+            font-family: inherit;
+            font-size: 0.9rem;
+            padding: 10px 18px;
+            border-radius: 50px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.25s ease;
+        }
+
+        .dropdown-toggle:hover {
+            border-color: var(--mint-deep);
+            background: var(--mint-light);
+        }
+
+        .dropdown-toggle .arrow {
+            display: inline-block;
+            font-size: 0.65rem;
+            transition: transform 0.25s ease;
+            color: var(--mint-hover);
+        }
+
+        .dropdown.open .dropdown-toggle .arrow {
+            transform: rotate(180deg);
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            top: calc(100% + 10px);
+            right: 0;
+            min-width: 260px;
+            background: var(--white);
+            border-radius: 16px;
+            box-shadow: 0 20px 50px rgba(110, 143, 126, 0.15);
+            border: 1px solid var(--mint-soft);
+            padding: 10px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-8px);
+            transition: all 0.25s ease;
+            z-index: 200;
+        }
+
+        .dropdown.open .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown-menu a {
+            display: block;
+            padding: 11px 16px;
+            font-size: 0.9rem;
+            border-radius: 10px;
+            color: var(--grey-text);
+            transition: background 0.2s ease, color 0.2s ease;
+        }
+
+        .dropdown-menu a:hover {
+            background: var(--mint-light);
+            color: var(--mint-hover);
+        }
+
+        .dropdown-menu a + a {
+            border-top: 1px solid var(--mint-light);
+        }
+
+        /* --- Секция Hero --- */
+        .hero {
+            padding: 80px 0 100px;
+            display: flex;
+            align-items: center;
+            gap: 60px;
+        }
+
+        .hero-content {
+            flex: 1.2;
+        }
+
+        .hero-image {
+            flex: 1;
+            background: linear-gradient(135deg, var(--mint-light) 0%, var(--beige-card) 100%);
+            border-radius: var(--radius);
+            min-height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--mint-hover);
+            font-size: 1.1rem;
+            font-weight: 300;
+            box-shadow: var(--shadow);
+            position: relative;
+            overflow: hidden;
+        }
+
+                .hero-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Картинка заполняет блок, сохраняя пропорции */
+            border-radius: var(--radius); /* Скругляет углы фото, чтобы оно легло в блок */
+        }
+
+        .hero-desc {
+            font-size: 1.1rem;
+            color: var(--grey-light);
+            max-width: 480px;
+            margin-bottom: 2rem;
+        }
+
+        /* --- Разделитель --- */
+        .divider {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 60px 0;
+        }
+
+        .divider::before,
+        .divider::after {
+            content: "";
+            flex: 1;
+            height: 1px;
+            background-color: var(--mint-soft);
+        }
+
+        .divider-icon {
+            margin: 0 20px;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: var(--mint-deep);
+            box-shadow: 0 0 0 4px var(--mint-light);
+        }
+
+        /* --- Секция О нас --- */
+        .about-section {
+            padding: 40px 0;
+        }
+
+        .about-content {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 50px;
+        }
+
+        .about-content p {
+            font-size: 1.1rem;
+            color: var(--grey-text);
+            line-height: 1.8;
+        }
+
+        /* Сетка для фото салона */
+        .salon-gallery {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+            margin-bottom: 40px;
+        }
+
+        .salon-photo {
+            border-radius: var(--radius);
+            overflow: hidden;
+            height: 400px;
+            background: linear-gradient(135deg, var(--mint-light) 0%, var(--beige-card) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--mint-hover);
+            font-size: 1rem;
+            font-weight: 300;
+            box-shadow: var(--shadow);
+            position: relative;
+        }
+
+        .salon-photo::after {
+            content: "Фото салона";
+            opacity: 0.5;
+            position: absolute;
+            z-index: 1;
+        }
+
+        .salon-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* --- Секция Контакты --- */
+        .contacts {
+            display: flex;
+            gap: 60px;
+            padding: 40px 0 80px;
+        }
+
+        .contact-info {
+            flex: 1;
+        }
+
+        .contact-info h3 {
+            font-size: 1.5rem;
+            margin-bottom: 24px;
+        }
+
+        .contact-item {
+            margin-bottom: 24px;
+        }
+
+        .contact-item .label {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--mint-hover);
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .contact-item .value {
+            font-size: 1.1rem;
+            color: #2c3e35;
+        }
+
+        .contact-item .value a {
+            border-bottom: 1px solid transparent;
+            transition: border-color 0.3s;
+        }
+
+        .contact-item .value a:hover {
+            border-color: var(--mint-hover);
+        }
+
+        /* Оформление адресов */
+        .address-list {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            margin-top: 12px;
+        }
+
+        .address-card {
+            background: var(--white);
+            padding: 16px 20px;
+            border-radius: 12px;
+            border-left: 3px solid var(--mint-deep);
+            box-shadow: 0 4px 15px rgba(110, 143, 126, 0.05);
+        }
+
+        .address-title {
+            font-size: 1.05rem;
+            font-weight: 600;
+            color: #2c3e35;
+            margin-bottom: 4px;
+        }
+
+        .address-subtitle {
+            font-size: 0.85rem;
+            color: var(--grey-light);
+            margin-bottom: 12px;
+            line-height: 1.4;
+        }
+
+        .address-services {
+            font-size: 0.85rem;
+            color: var(--grey-text);
+            background: var(--mint-light);
+            padding: 8px 12px;
+            border-radius: 8px;
+            line-height: 1.4;
+        }
+
+        .address-services strong {
+            color: var(--mint-hover);
+        }
+
+        /* --- Карта --- */
+        .map-container {
+            width: 400px;
+            height: 400px;
+            margin: auto;
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--mint-soft);
+            position: relative;
+            flex-shrink: 0;
+        }
+
+        .map-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            display: block;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        /* --- Кнопка наверх --- */
+        .scroll-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background-color: var(--mint-deep);
+            color: var(--white);
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(102, 205, 170, 0.4);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px);
+            transition: all 0.3s ease;
+            z-index: 999;
+        }
+
+        .scroll-to-top.show {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .scroll-to-top:hover {
+            background-color: var(--mint-hover);
+            transform: translateY(-4px);
+            box-shadow: 0 6px 20px rgba(74, 158, 130, 0.5);
+        }
+
+        /* --- Футер --- */
+        footer {
+            padding: 40px 0;
+            border-top: 1px solid var(--mint-soft);
+            text-align: center;
+            font-size: 0.85rem;
+            color: var(--grey-light);
+        }
+
+        /* --- Адаптив --- */
+        @media (max-width: 980px) {
+            .nav-links {
+                display: none;
+            }
+        }
+
+        @media (max-width: 900px) {
+            .hero {
+                flex-direction: column;
+                padding: 40px 0 60px;
+            }
+            .hero-image {
+                width: 100%;
+                min-height: 280px;
+            }
+            .contacts {
+                flex-direction: column;
+                gap: 40px;
+            }
+            .map-container {
+                width: 100%;
+                max-width: 400px;
+                height: 350px;
+                margin: 30px auto 0;
+            }
+            .salon-gallery {
+                grid-template-columns: 1fr;
+            }
+            .salon-photo {
+                height: 300px;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .header-inner {
+                flex-wrap: wrap;
+                gap: 12px;
+            }
+            .header-right {
+                gap: 12px;
+            }
+            .btn {
+                padding: 10px 18px;
+                font-size: 0.82rem;
+            }
+            .dropdown-toggle {
+                padding: 9px 14px;
+                font-size: 0.82rem;
+            }
+            .dropdown-menu {
+                right: auto;
+                left: 0;
+                min-width: 240px;
+            }
+            .logo { font-size: 1rem; gap: 8px; }
+            .logo img { height: 35px; }
+            .scroll-to-top {
+                bottom: 20px;
+                right: 20px;
+                width: 42px;
+                height: 42px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Шапка -->
+    <header>
+        <div class="container header-inner">
+            <a href="index.html" class="logo">
+                <img src="images/logo.png" alt="Логотип KATRIN_LASER">
+                KATRIN<span>_LASER</span>
+            </a>
+
+            <div class="header-right">
+                <div class="nav-links">
+                    <a href="#about">О студии</a>
+                    <a href="#contacts">Контакты</a>
+                </div>
+
+                <div class="dropdown" id="dropdown">
+                    <button class="dropdown-toggle" type="button" aria-expanded="false" aria-haspopup="true">
+                        Меню
+                        <span class="arrow">▼</span>
+                    </button>
+                    <div class="dropdown-menu" role="menu">
+                        <a href="#about" role="menuitem">О студии</a>
+                        <a href="services.html" role="menuitem">Услуги</a>
+                      <!-- <a href="#offers" role="menuitem">Акции</a>
+                        <a href="#team" role="menuitem">Команда</a> -->
+                        <a href="preparation.html" role="menuitem">Процедуры / Подготовка</a>
+                        <a href="tattoo.html" role="menuitem">Удаление тату / татуажа</a>
+                        <a href="gallery.html" role="menuitem">Галерея</a>
+                        <a href="#contacts" role="menuitem">Контакты</a>
+                    </div>
+                </div>
+
+                <a href="https://vk.me/katrin__laser_tver" target="_blank" rel="noopener" class="btn btn-primary">Записаться</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Главный экран (добавлен fade-in-section) -->
+    <section class="hero container fade-in-section">
+        <div class="hero-content">
+            <div class="subtitle">Студия эпиляции в Твери</div>
+            <h1>Гладкость,<br>которая остаётся с вами</h1>
+            <p class="hero-desc">
+                Лазерная эпиляция, восковая депиляция и уход за телом.
+                Современное оборудование, комфорт и результат с первого визита.
+            </p>
+            <a href="https://vk.me/katrin__laser_tver" target="_blank" rel="noopener" class="btn btn-primary">Записаться онлайн</a>
+        </div>
+        <div class="hero-image">
+            <img src="images/kata.jpg" alt="katrin">
+        </div>
+    </section>
+
+    <!-- Разделитель (добавлен fade-in-section) -->
+    <div class="container fade-in-section">
+        <div class="divider">
+            <div class="divider-icon"></div>
+        </div>
+    </div>
+
+    <!-- Секция О нас (добавлен fade-in-section) -->
+    <section id="about" class="about-section container fade-in-section">
+        <div class="about-content">
+            <div class="subtitle">О нас</div>
+            <h2>Сеть салонов лазерной эпиляции</h2>
+            <p>
+                Мы работаем на современных диодных аппаратах и подбираем процедуры под Ваш тип кожи и задачи, чтобы Вы получали безопасный и заметный результат уже после первых сеансов.
+            </p>
+        </div>
+
+        <!-- Место для пары фотографий салона -->
+        <div class="salon-gallery">
+            <div class="salon-photo">
+                 <img src="images/salon1.jpg" alt="Фото салона 1"> 
+            </div>
+            <div class="salon-photo">
+                <img src="images/salon2.jpg" alt="Фото салона 2"> 
+            </div>
+        </div>
+    </section>
+
+    <!-- Разделитель (добавлен fade-in-section) -->
+    <div class="container fade-in-section">
+        <div class="divider">
+            <div class="divider-icon"></div>
+        </div>
+    </div>
+
+    <!-- Секция Контакты (добавлен fade-in-section) -->
+    <section id="contacts" class="container fade-in-section">
+        <div class="contacts">
+            <div class="contact-info">
+                <h3>Контакты</h3>
+                <div class="contact-item">
+                    <div class="label">Телефон</div>
+                    <div class="value"><a href="tel:+79201999990">+7 (920) 199-99-90</a></div>
+                </div>
+                <div class="contact-item">
+                    <div class="label">Адреса</div>
+                    <div class="address-list">
+                        <!-- Адрес 1 -->
+                        <div class="address-card">
+                            <div class="address-title">пр-т Чайковского, 27/32</div>
+                            <div class="address-subtitle">3 этаж, каб. 316А (ост. Чайковского / Склизкова, над кафе «Старая Тверь»)</div>
+                            <div class="address-services">
+                                <strong>Доступные услуги:</strong> лазерная эпиляция, удаление тату/татуажа, карбоновый пилинг
+                            </div>
+                        </div>
+                        
+                        <!-- Адрес 2 -->
+                        <div class="address-card">
+                            <div class="address-title">Октябрьский пр-т, 99</div>
+                            <div class="address-subtitle">Секция 16, офис 1 (вход со стороны проспекта)</div>
+                            <div class="address-services">
+                                <strong>Доступные услуги:</strong> лазерная эпиляция
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <div class="label">Время работы</div>
+                    <div class="value">Пн–Вс: 10:00 – 21:00</div>
+                </div>
+                <div class="contact-item">
+                    <div class="label">Соцсети</div>
+                    <div class="value"><a href="https://vk.ru/katrin__laser_tver" target="_blank" rel="noopener">ВКонтакте →</a></div>
+                </div>
+                <div style="margin-top: 32px;">
+                    <a href="https://vk.me/katrin__laser_tver" target="_blank" rel="noopener" class="btn btn-primary">Записаться</a>
+                </div>
+            </div>
+            
+            <!-- Карта -->
+            <div class="map-container">
+                <iframe 
+                    src="https://yandex.ru/map-widget/v1/?um=constructor%3A1ea5b228d568b0ea66283ffd19b49c19f66cbaa87ed1712ea4d7c012a1a3239d&amp;source=constructor" 
+                    width="100%" 
+                    height="100%" 
+                    frameborder="0" 
+                    allowfullscreen="true"
+                    loading="lazy"
+                    title="Студия KATRIN_LASER на карте">
+                </iframe>
+            </div>
+        </div>
+    </section>
+
+    <!-- Футер -->
+    <footer>
+        <div class="container">
+            <p>© 2025 KATRIN_LASER · Студия эпиляции в Твери</p>
+            <p style="margin-top: 8px; font-size: 0.75rem;">Информация на сайте не является публичной офертой.</p>
+        </div>
+    </footer>
+
+    <!-- Кнопка Наверх -->
+    <button id="scrollToTopBtn" class="scroll-to-top" aria-label="Наверх">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 19V5M12 5L5 12M12 5L19 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+    </button>
+
+    <!-- Скрипт выпадающего меню, кнопки наверх и анимации -->
+    <script>
+        (function () {
+            // --- Выпадающее меню ---
+            const dropdown = document.getElementById('dropdown');
+            const toggle = dropdown.querySelector('.dropdown-toggle');
+
+            toggle.addEventListener('click', function (e) {
+                e.stopPropagation();
+                const isOpen = dropdown.classList.toggle('open');
+                toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+            });
+
+            document.addEventListener('click', function (e) {
+                if (!dropdown.contains(e.target)) {
+                    dropdown.classList.remove('open');
+                    toggle.setAttribute('aria-expanded', 'false');
+                }
+            });
+
+            document.addEventListener('keydown', function (e) {
+                if (e.key === 'Escape') {
+                    dropdown.classList.remove('open');
+                    toggle.setAttribute('aria-expanded', 'false');
+                }
+            });
+
+            dropdown.querySelectorAll('.dropdown-menu a').forEach(function (link) {
+                link.addEventListener('click', function () {
+                    dropdown.classList.remove('open');
+                    toggle.setAttribute('aria-expanded', 'false');
+                });
+            });
+
+            // --- Кнопка Наверх ---
+            const scrollToTopBtn = document.getElementById('scrollToTopBtn');
+            
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 300) {
+                    scrollToTopBtn.classList.add('show');
+                } else {
+                    scrollToTopBtn.classList.remove('show');
+                }
+            });
+
+            scrollToTopBtn.addEventListener('click', () => {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+
+            // --- Плавное появление блоков при скролле ---
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.15 // Блок появится, когда 15% его площади покажется на экране
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        // Если хотим, чтобы анимация срабатывала только 1 раз, раскомментируем строку ниже:
+                        // observer.unobserve(entry.target); 
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll('.fade-in-section').forEach(section => {
+                observer.observe(section);
+            });
+        })();
+    </script>
+
+</body>
+</html>

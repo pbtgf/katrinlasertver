@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Галерея — KATRIN_LASER</title>
+    <style>
+        /* --- Цветовая палитра (единая для всего сайта) --- */
+        :root {
+            --mint-light: #e3f0e9;
+            --mint-soft: #c1d5c9;
+            --mint-deep: #66CDAA;   /* Основной мятный цвет (кнопки) */
+            --mint-hover: #4A9E82;  /* Темный мятный при наведении */
+            --beige-bg: #faf7f2;    /* Бежевый фон сайта */
+            --beige-card: #f2ede4;
+            --grey-text: #4a4a4a;
+            --grey-light: #9b9b9b;
+            --white: #ffffff;
+            --accent: #66CDAA;      /* Акцентный цвет */
+            --shadow: 0 10px 30px rgba(110, 143, 126, 0.08);
+            --radius: 20px;
+            --font-main: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: var(--font-main);
+            background-color: var(--beige-bg);
+            color: var(--grey-text);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        a { text-decoration: none; color: inherit; }
+        img { max-width: 100%; display: block; }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* --- Шапка --- */
+        header {
+            padding: 10px 0;
+            position: sticky;
+            top: 0;
+            background-color: rgba(250, 247, 242, 0.92);
+            backdrop-filter: blur(10px);
+            z-index: 100;
+            border-bottom: 1px solid var(--mint-soft);
+        }
+
+        .header-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 24px;
+        }
+
+        .logo {
+            font-size: 1.2rem;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            color: #2c3e35;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo img { height: 45px; width: auto; object-fit: contain; }
+        .logo span { color: var(--mint-hover); font-weight: 400; }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 28px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+            white-space: nowrap;
+            text-align: center;
+        }
+
+        .btn-primary {
+            background-color: var(--mint-deep);
+            color: var(--white);
+            box-shadow: 0 4px 15px rgba(102, 205, 170, 0.3);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--mint-hover);
+            transform: translateY(-2px);
+        }
+
+        .btn-back {
+            background: transparent;
+            border: 1px solid var(--mint-soft);
+            color: var(--grey-text);
+        }
+
+        .btn-back:hover { background: var(--mint-light); }
+
+        /* --- Заголовок страницы --- */
+        .page-header { 
+            padding: 60px 0 20px; 
+            text-align: center; 
+        }
+        
+        h1 { 
+            font-size: clamp(2.2rem, 4vw, 3.2rem); 
+            font-weight: 400;
+            letter-spacing: -0.02em;
+            color: #2c3e35;
+            margin-bottom: 1rem;
+        }
+
+        .subtitle {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--mint-hover);
+            font-weight: 600;
+            margin-bottom: 0.8rem;
+        }
+
+        /* --- Разделитель --- */
+        .divider {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 50px 0;
+        }
+
+        .divider::before,
+        .divider::after {
+            content: "";
+            flex: 1;
+            height: 1px;
+            background-color: var(--mint-soft);
+        }
+
+        .divider-icon {
+            margin: 0 20px;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: var(--mint-deep);
+            box-shadow: 0 0 0 4px var(--mint-light);
+        }
+
+                        /* --- Сетки для фото и видео --- */
+        .gallery-grid {
+            display: grid;
+            /* Уменьшили ширину до 260px, так как вертикальные фото уже */
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 24px;
+            margin-bottom: 40px;
+            justify-content: center; /* Центрирует неполный последний ряд */
+        }
+
+        .gallery-item {
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--mint-soft);
+            background: #fdfdfd; /* Легкий фон для прозрачных краев */
+            position: relative;
+            aspect-ratio: 3 / 4; /* Задаем ВЕРТИКАЛЬНЫЕ пропорции (ширина / высота) */
+        }
+
+        .gallery-item img,
+        .gallery-item video {
+            width: 100%;
+            height: 100%;
+            object-fit: contain; /* Фото/видео помещаются целиком, без обрезки */
+            display: block;
+            transition: transform 0.4s ease;
+        }
+        /* Специальная сетка для видео (делаем карточки больше) */
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); /* Увеличили ширину до 320px */
+            gap: 24px;
+            margin-bottom: 40px;
+            justify-content: center;
+        }
+
+        /* Карточка для видео */
+        .gallery-item.video-card {
+            aspect-ratio: 9 / 16; /* Делаем карточки еще более вытянутыми по вертикали, как в Reels/Shorts */
+        }
+
+        /* Оформление самого видео */
+        .gallery-item video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Заполняет карточку целиком */
+            pointer-events: none; /* Отключает клики по видео (чтобы не было паузы при нажатии) */
+        }
+        .gallery-item:hover img {
+            transform: scale(1.03); /* Легкий зум при наведении */
+        }
+
+        /* Специфично для видео */
+        .gallery-item video {
+            background: #000; /* Черный фон для видео, чтобы не было белых полос */
+        }
+
+        /* --- Кнопка наверх --- */
+        .scroll-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background-color: var(--mint-deep);
+            color: var(--white);
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(102, 205, 170, 0.4);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px);
+            transition: all 0.3s ease;
+            z-index: 999;
+        }
+
+        .scroll-to-top.show {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .scroll-to-top:hover {
+            background-color: var(--mint-hover);
+            transform: translateY(-4px);
+            box-shadow: 0 6px 20px rgba(74, 158, 130, 0.5);
+        }
+
+        /* --- Футер --- */
+        footer {
+            padding: 40px 0;
+            border-top: 1px solid var(--mint-soft);
+            text-align: center;
+            font-size: 0.85rem;
+            color: var(--grey-light);
+            margin-top: 60px;
+        }
+
+        /* --- Адаптив --- */
+        @media (max-width: 600px) {
+            .header-inner { flex-wrap: wrap; gap: 12px; }
+            .logo { font-size: 1rem; gap: 8px; }
+            .logo img { height: 35px; }
+            .btn { padding: 10px 18px; font-size: 0.82rem; }
+            .scroll-to-top { bottom: 20px; right: 20px; width: 42px; height: 42px; }
+            .gallery-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Шапка -->
+    <header>
+        <div class="container header-inner">
+            <a href="index.html" class="logo">
+                <img src="images/logo.png" alt="Логотип KATRIN_LASER">
+                KATRIN<span>_LASER</span>
+            </a>
+            <div style="display: flex; gap: 20px;">
+                <a href="index.html" class="btn btn-back">← На главную</a>
+                <a href="https://vk.me/katrin__laser_tver" target="_blank" rel="noopener" class="btn btn-primary">Записаться</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Заголовок страницы -->
+    <section class="page-header container">
+        <div class="subtitle">Портфолио</div>
+        <h1>Наша галерея</h1>
+    </section>
+
+    <!-- Контент -->
+    <section class="container">
+        
+        <!-- Сетка для 15 фотографий -->
+        <div class="gallery-grid">
+            <div class="gallery-item"><img src="images/foto1.jpg" alt="Фото 1"></div>
+            <div class="gallery-item"><img src="images/foto2.jpg" alt="Фото 2"></div>
+            <div class="gallery-item"><img src="images/foto3.jpg" alt="Фото 3"></div>
+            <div class="gallery-item"><img src="images/foto4.jpg" alt="Фото 4"></div>
+            <div class="gallery-item"><img src="images/foto5.jpg" alt="Фото 5"></div>
+            <div class="gallery-item"><img src="images/foto6.jpg" alt="Фото 6"></div>
+            <div class="gallery-item"><img src="images/foto7.jpg" alt="Фото 7"></div>
+            <div class="gallery-item"><img src="images/foto8.jpg" alt="Фото 8"></div>
+            <div class="gallery-item"><img src="images/foto9.jpg" alt="Фото 9"></div>
+            <div class="gallery-item"><img src="images/foto10.jpg" alt="Фото 10"></div>
+            <div class="gallery-item"><img src="images/foto11.jpg" alt="Фото 11"></div>
+            <div class="gallery-item"><img src="images/foto12.jpg" alt="Фото 12"></div>
+            <div class="gallery-item"><img src="images/foto13.jpg" alt="Фото 13"></div>
+            <div class="gallery-item"><img src="images/foto14.jpg" alt="Фото 14"></div>
+            <div class="gallery-item"><img src="images/foto15.jpg" alt="Фото 15"></div>
+        </div>
+
+        <!-- Разделитель -->
+        <div class="divider">
+            <div class="divider-icon"></div>
+        </div>
+
+                <!-- Сетка для 6 видеозаписей -->
+        <div class="video-grid">
+            <div class="gallery-item video-card">
+                <video autoplay loop muted playsinline preload="metadata">
+                    <source src="images/video1.mp4" type="video/mp4">
+                </video>
+            </div>
+            <div class="gallery-item video-card">
+                <video autoplay loop muted playsinline preload="metadata">
+                    <source src="images/video2.mp4" type="video/mp4">
+                </video>
+            </div>
+            <div class="gallery-item video-card">
+                <video autoplay loop muted playsinline preload="metadata">
+                    <source src="images/video3.mp4" type="video/mp4">
+                </video>
+            </div>
+            <div class="gallery-item video-card">
+                <video autoplay loop muted playsinline preload="metadata">
+                    <source src="images/video4.mp4" type="video/mp4">
+                </video>
+            </div>
+            <div class="gallery-item video-card">
+                <video autoplay loop muted playsinline preload="metadata">
+                    <source src="images/video5.mp4" type="video/mp4">
+                </video>
+            </div>
+            <div class="gallery-item video-card">
+                <video autoplay loop muted playsinline preload="metadata">
+                    <source src="images/video6.mp4" type="video/mp4">
+                </video>
+            </div>
+        </div>
+
+    </section>
+
+    <!-- Футер -->
+    <footer>
+        <div class="container">
+            <p>© 2025 KATRIN_LASER · Студия эпиляции в Твери</p>
+        </div>
+    </footer>
+
+    <!-- Кнопка Наверх -->
+    <button id="scrollToTopBtn" class="scroll-to-top" aria-label="Наверх">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 19V5M12 5L5 12M12 5L19 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+    </button>
+
+    <!-- Скрипт для кнопки Наверх -->
+    <script>
+        const scrollToTopBtn = document.getElementById('scrollToTopBtn');
+        
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                scrollToTopBtn.classList.add('show');
+            } else {
+                scrollToTopBtn.classList.remove('show');
+            }
+        });
+
+        scrollToTopBtn.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+    </script>
+
+</body>
+</html>
