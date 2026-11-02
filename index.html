@@ -170,7 +170,7 @@
             display: flex;
             align-items: center;
             gap: 28px;
-            margin-left: auto; /* прижимает правую часть к краю */
+            margin-left: auto;
         }
 
         .nav-links {
@@ -538,7 +538,6 @@
 
         /* ================= АДАПТИВ ================= */
 
-        /* Планшет / узкий ПК */
         @media (max-width: 980px) {
             .nav-links {
                 display: none;
@@ -548,11 +547,11 @@
         /* Мобильные: сохраняем hero в одну строку */
         @media (max-width: 900px) {
             .container {
-                padding: 0 16px; /* текст не прилипает к краям */
+                padding: 0 20px; /* Увеличили боковые отступы, чтобы текст не прилипал */
             }
 
             .hero {
-                flex-direction: row;      /* фото справа от текста, как на ПК */
+                flex-direction: row;
                 align-items: center;
                 gap: 20px;
                 padding: 32px 0 48px;
@@ -561,22 +560,24 @@
             .hero-content {
                 flex: 1.1;
                 min-width: 0;
+                padding-left: 4px; /* Дополнительный отступ для текста */
             }
 
             .hero-desc {
                 font-size: 0.95rem;
                 margin-bottom: 1.4rem;
+                max-width: 100%; /* Текст заполняет блок равномерно */
             }
 
             h1 {
-                font-size: clamp(2rem, 7vw, 2.8rem);
+                font-size: clamp(1.8rem, 7vw, 2.6rem);
                 margin-bottom: 1rem;
             }
 
             .hero-image {
                 flex: 0.9;
                 min-height: 0;
-                aspect-ratio: 3 / 4; /* держит пропорции фото */
+                aspect-ratio: 3 / 4;
                 max-width: 46%;
             }
 
@@ -593,7 +594,7 @@
                 margin: 30px auto 0;
             }
 
-            /* Фото салона — две рядом, как на ПК */
+            /* Фото салона — две рядом */
             .salon-gallery {
                 grid-template-columns: 1fr 1fr;
                 gap: 14px;
@@ -607,13 +608,13 @@
         /* Телефоны */
         @media (max-width: 600px) {
             .header-inner {
-                flex-wrap: nowrap;       /* логотип и кнопки в одну строку */
+                flex-wrap: nowrap;
                 gap: 10px;
             }
 
             .header-right {
                 gap: 10px;
-                margin-left: auto;       /* прижимаем вправо, не по центру */
+                margin-left: auto;
             }
 
             .btn {
@@ -643,6 +644,7 @@
 
             .hero-content {
                 flex: 1.15;
+                padding-left: 6px; /* Чуть больше отступа для маленьких экранов */
             }
 
             .hero-image {
@@ -682,7 +684,7 @@
             }
         }
 
-        /* Очень узкие экраны — чуть уменьшаем фото hero */
+        /* Очень узкие экраны */
         @media (max-width: 380px) {
             .hero-image {
                 max-width: 40%;
@@ -762,7 +764,7 @@
             </p>
         </div>
 
-        <!-- Пара фотографий салона: на ПК и на телефоне — рядом -->
+        <!-- Пара фотографий салона -->
         <div class="salon-gallery">
             <div class="salon-photo">
                 <img src="images/salon1.jpg" alt="Фото салона 1">
@@ -840,7 +842,7 @@
     <!-- Футер -->
     <footer>
         <div class="container">
-            <p>© 2025 KATRIN_LASER · Студия эпиляции в Твери</p>
+            <p>© 2026 KATRIN_LASER · Студия эпиляции в Твери</p>
             <p style="margin-top: 8px; font-size: 0.75rem;">Информация на сайте не является публичной офертой.</p>
         </div>
     </footer>
@@ -923,6 +925,5 @@
             });
         })();
     </script>
-
 </body>
 </html>
