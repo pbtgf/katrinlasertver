@@ -67,10 +67,19 @@
             display: flex;
             align-items: center;
             gap: 10px;
+            flex-shrink: 0;
         }
 
         .logo img { height: 45px; width: auto; object-fit: contain; }
         .logo span { color: var(--mint-hover); font-weight: 400; }
+
+        /* Обертка для кнопок в шапке */
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            flex-shrink: 0;
+        }
 
         .btn {
             display: inline-block;
@@ -284,19 +293,55 @@
             margin-top: 60px;
         }
 
-        /* --- Адаптив --- */
+        /* ================= АДАПТИВ ================= */
         @media (max-width: 768px) {
             .info-card { padding: 24px; }
             .info-card h2 { font-size: 1.3rem; }
             .highlight-box { padding: 16px; }
         }
 
+        @media (max-width: 700px) {
+            .container { padding: 0 16px; }
+        }
+
         @media (max-width: 600px) {
-            .header-inner { flex-wrap: wrap; gap: 12px; }
-            .logo { font-size: 1rem; gap: 8px; }
-            .logo img { height: 35px; }
-            .btn { padding: 10px 18px; font-size: 0.82rem; }
-            .scroll-to-top { bottom: 20px; right: 20px; width: 42px; height: 42px; }
+            .header-inner { 
+                flex-wrap: nowrap; 
+                gap: 8px;
+                justify-content: space-between;
+            }
+            
+            .header-right {
+                gap: 8px;
+            }
+
+            /* Скрываем текст логотипа, оставляем только картинку */
+            .logo {
+                font-size: 0; 
+                gap: 0;
+            }
+            
+            .logo img { 
+                height: 35px; 
+            }
+
+            .btn {
+                padding: 9px 14px;
+                font-size: 0.8rem;
+                white-space: nowrap;
+            }
+
+            .scroll-to-top { 
+                bottom: 20px; 
+                right: 20px; 
+                width: 42px; 
+                height: 42px; 
+            }
+        }
+
+        @media (max-width: 380px) {
+            .btn { padding: 8px 10px; font-size: 0.75rem; }
+            .header-right { gap: 4px; }
         }
     </style>
 </head>
@@ -309,7 +354,7 @@
                 <img src="images/logo.png" alt="Логотип KATRIN_LASER">
                 KATRIN<span>_LASER</span>
             </a>
-            <div style="display: flex; gap: 20px;">
+            <div class="header-right">
                 <a href="index.html" class="btn btn-back">← На главную</a>
                 <a href="https://vk.me/katrin__laser_tver" target="_blank" rel="noopener" class="btn btn-primary">Записаться</a>
             </div>
