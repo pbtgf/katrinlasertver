@@ -348,18 +348,21 @@
             line-height: 1.8;
         }
 
-        /* Сетка для фото салона */
+        /* Сетка для фото салона (ВЕРТИКАЛЬНЫЕ) */
         .salon-gallery {
             display: grid;
-            grid-template-columns: 1fr 1fr;
+            grid-template-columns: 1fr 1fr; /* Две колонки */
             gap: 24px;
             margin-bottom: 40px;
+            max-width: 800px; /* Ограничили ширину, чтобы фото не были гигантскими */
+            margin-left: auto;
+            margin-right: auto;
         }
 
         .salon-photo {
             border-radius: var(--radius);
             overflow: hidden;
-            height: 400px;
+            aspect-ratio: 3 / 4; /* Задаем вертикальные пропорции (ширина / высота) */
             background: linear-gradient(135deg, var(--mint-light) 0%, var(--beige-card) 100%);
             display: flex;
             align-items: center;
@@ -602,10 +605,6 @@
                 grid-template-columns: 1fr 1fr;
                 gap: 14px;
             }
-
-            .salon-photo {
-                height: 220px;
-            }
         }
 
         /* Телефоны */
@@ -671,10 +670,6 @@
                 gap: 10px;
             }
 
-            .salon-photo {
-                height: 160px;
-            }
-
             .salon-photo::after {
                 font-size: 0.8rem;
             }
@@ -691,9 +686,6 @@
         @media (max-width: 380px) {
             .hero-image {
                 max-width: 40%;
-            }
-            .salon-photo {
-                height: 130px;
             }
         }
     </style>
@@ -772,10 +764,10 @@
             </p>
         </div>
 
-        <!-- Пара фотографий салона -->
+        <!-- Пара фотографий салона (вертикальные) -->
         <div class="salon-gallery">
             <div class="salon-photo">
-                <img src="images/foto2.jpg" alt="Фото салона 1">
+                <img src="images/foto17.jpg" alt="Фото салона 1">
             </div>
             <div class="salon-photo">
                 <img src="images/salon2.jpg" alt="Фото салона 2">
