@@ -839,10 +839,10 @@
         </div>
     </section>
 
-    <!-- Футер -->
+        <!-- Футер -->
     <footer>
         <div class="container">
-            <p>© 2026 KATRIN_LASER · Студия эпиляции в Твери</p>
+            <p>© <span id="current-year"></span> KATRIN_LASER · Студия эпиляции в Твери</p>
             <p style="margin-top: 8px; font-size: 0.75rem;">Информация на сайте не является публичной офертой.</p>
         </div>
     </footer>
@@ -923,6 +923,9 @@
             document.querySelectorAll('.fade-in-section').forEach(section => {
                 observer.observe(section);
             });
+// Автоматическая смена года в подвале
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+
         })();
     </script>
 </body>
