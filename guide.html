@@ -7,7 +7,7 @@
     <!-- Фавикон (иконка сайта) -->
     <link rel="icon" href="images/favicon.png" type="image/png">
     <link rel="apple-touch-icon" href="images/favicon.png">
-    <style>
+       <style>
         /* --- Цветовая палитра --- */
         :root {
             --mint-light: #e3f0e9;
@@ -138,7 +138,7 @@
         .guide-nav-wrapper {
             position: sticky;
             top: 66px;
-            background: rgba(250, 247, 242, 0.85); /* Полупрозрачный фон */
+            background: rgba(250, 247, 242, 0.85);
             backdrop-filter: blur(8px);
             border-bottom: 1px solid var(--mint-soft);
             z-index: 99;
@@ -202,7 +202,7 @@
             box-shadow: 0 6px 15px rgba(102, 205, 170, 0.25);
         }
 
-        /* Стиль для АКТИВНОЙ кнопки (блока, который сейчас на экране) */
+        /* Стиль для АКТИВНОЙ кнопки */
         .guide-nav a.active {
             background: var(--mint-deep);
             color: var(--white);
@@ -241,14 +241,13 @@
             scroll-margin-top: 130px;
         }
 
-        /* Оформление карточки: градиент, двойная рамка, декор */
+        /* Оформление карточки */
         .guide-card {
             background: linear-gradient(135deg, var(--white) 0%, #fdfcfa 100%);
             border-radius: var(--radius);
             padding: 40px;
             box-shadow: 0 15px 35px rgba(110, 143, 126, 0.06);
             border: 1px solid var(--mint-soft);
-            /* Эффект двойной рамки */
             outline: 1px solid rgba(102, 205, 170, 0.15);
             outline-offset: -6px;
             margin-bottom: 30px;
@@ -257,13 +256,11 @@
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
-        /* Легкий подъем блока при наведении */
         .guide-card:hover {
             transform: translateY(-3px);
             box-shadow: 0 20px 45px rgba(110, 143, 126, 0.1);
         }
 
-        /* Декоративный узор в правом верхнем углу */
         .guide-card::before {
             content: "";
             position: absolute;
@@ -277,7 +274,6 @@
             pointer-events: none;
         }
 
-        /* Декоративная полоска сверху */
         .guide-card::after {
             content: "";
             position: absolute;
@@ -291,7 +287,7 @@
 
         .guide-card > * {
             position: relative;
-            z-index: 1; /* Текст поверх узоров */
+            z-index: 1;
         }
 
         .guide-card h2 {
@@ -312,7 +308,6 @@
             margin-bottom: 0;
         }
 
-        /* Красивые акценты */
         .highlight-text {
             font-size: 1.2rem;
             font-weight: 600;
@@ -323,7 +318,7 @@
             display: block;
         }
 
-        /* Оформление цитат (без кавычек) */
+        /* Цитаты (без кавычек) */
         .quote-box {
             background: var(--mint-light);
             border-left: 4px solid var(--mint-deep);
@@ -391,7 +386,6 @@
             display: block;
         }
 
-        /* Галерея отзывов (горизонтальная, друг под другом, меньше) */
         .reviews-gallery {
             display: flex;
             flex-direction: column;
@@ -404,7 +398,6 @@
             aspect-ratio: auto; 
         }
 
-        /* Галерея до/после (по центру) */
         .results-gallery {
             display: flex;
             justify-content: center;
@@ -424,7 +417,6 @@
             object-fit: cover;
         }
 
-        /* Сетка для преимуществ */
         .features-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -457,7 +449,6 @@
             color: var(--grey-text);
         }
 
-        /* Разделитель */
         .divider {
             display: flex;
             align-items: center;
@@ -552,6 +543,26 @@
             .quote-box { padding: 16px; font-size: 1rem; }
             .results-gallery .photo-item { max-width: 100%; }
             .reviews-gallery { max-width: 100%; }
+            
+            /* ИСПРАВЛЕНИЕ МЕНЮ НА ТЕЛЕФОНЕ */
+            .guide-nav {
+                padding: 12px 16px;
+                gap: 8px;
+            }
+            
+            .guide-nav a {
+                flex-shrink: 0; /* Запрещает сжатие */
+                padding: 10px 16px;
+                font-size: 0.8rem;
+            }
+
+            .guide-nav a:hover {
+                transform: none; /* Убирает прыжок при нажатии */
+            }
+            
+            .guide-nav a.active {
+                transform: none; 
+            }
         }
 
         @media (max-width: 380px) {
