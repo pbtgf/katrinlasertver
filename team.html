@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Наша команда — KATRIN_LASER</title>
+    <!-- Фавикон (иконка сайта) -->
+    <link rel="icon" href="images/favicon.png" type="image/png">
+    <link rel="apple-touch-icon" href="images/favicon.png">
+    <style>
+        /* --- Цветовая палитра --- */
+        :root {
+            --mint-light: #e3f0e9;
+            --mint-soft: #c1d5c9;
+            --mint-deep: #66CDAA;
+            --mint-hover: #4A9E82;
+            --beige-bg: #faf7f2;
+            --beige-card: #f2ede4;
+            --grey-text: #4a4a4a;
+            --grey-light: #9b9b9b;
+            --white: #ffffff;
+            --shadow: 0 10px 30px rgba(110, 143, 126, 0.08);
+            --radius: 20px;
+            --font-main: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: var(--font-main);
+            background-color: var(--beige-bg);
+            color: var(--grey-text);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        a { text-decoration: none; color: inherit; }
+        img { max-width: 100%; display: block; }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* --- Шапка --- */
+        header {
+            padding: 10px 0;
+            position: sticky;
+            top: 0;
+            background-color: rgba(250, 247, 242, 0.92);
+            backdrop-filter: blur(10px);
+            z-index: 100;
+            border-bottom: 1px solid var(--mint-soft);
+        }
+
+        .header-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 24px;
+        }
+
+        .logo {
+            font-size: 1.2rem;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            color: #2c3e35;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-shrink: 0;
+        }
+
+        .logo img { height: 45px; width: auto; object-fit: contain; }
+        .logo span { color: var(--mint-hover); font-weight: 400; }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            flex-shrink: 0;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 28px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+            white-space: nowrap;
+            text-align: center;
+        }
+
+        .btn-primary {
+            background-color: var(--mint-deep);
+            color: var(--white);
+            box-shadow: 0 4px 15px rgba(102, 205, 170, 0.3);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--mint-hover);
+            transform: translateY(-2px);
+        }
+
+        .btn-back {
+            background: transparent;
+            border: 1px solid var(--mint-soft);
+            color: var(--grey-text);
+        }
+
+        .btn-back:hover { background: var(--mint-light); }
+
+        /* --- Заголовок страницы --- */
+        .page-header { 
+            padding: 60px 0 20px; 
+            text-align: center; 
+        }
+        
+        h1 { 
+            font-size: clamp(2.2rem, 4vw, 3.2rem); 
+            font-weight: 400;
+            letter-spacing: -0.02em;
+            color: #2c3e35;
+            margin-bottom: 1rem;
+        }
+
+        .subtitle {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--mint-hover);
+            font-weight: 600;
+            margin-bottom: 0.8rem;
+        }
+
+        .lead-text {
+            max-width: 760px;
+            margin: 0 auto;
+            font-size: 1.1rem;
+            color: var(--grey-light);
+            text-align: center;
+        }
+
+        /* --- Сетка команды --- */
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 32px;
+            margin-top: 40px;
+            margin-bottom: 60px;
+        }
+
+        .team-card {
+            background: var(--white);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            border: 1px solid var(--mint-soft);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .team-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 15px 35px rgba(110, 143, 126, 0.15);
+        }
+
+        .team-photo {
+            width: 100%;
+            aspect-ratio: 3 / 4; /* Идеальные пропорции для портретов */
+            background: linear-gradient(135deg, var(--mint-light) 0%, var(--beige-card) 100%);
+            overflow: hidden;
+            position: relative;
+        }
+
+        .team-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+
+        .team-card:hover .team-photo img {
+            transform: scale(1.03);
+        }
+
+        .team-info {
+            padding: 24px 20px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+            text-align: center;
+        }
+
+        .team-name {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #2c3e35;
+            margin-bottom: 4px;
+            letter-spacing: -0.01em;
+        }
+
+        .team-role {
+            font-size: 0.85rem;
+            color: var(--mint-hover);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 16px;
+        }
+
+        /* --- Красивое оформление описания --- */
+        .team-desc {
+            font-size: 0.9rem;
+            color: var(--grey-text);
+            line-height: 1.55;
+            text-align: left;
+            margin-bottom: 20px;
+            flex-grow: 1; /* Чтобы бейджи прижимались к низу */
+        }
+
+        .team-tags {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin-top: auto; /* Прижимает теги к низу карточки */
+        }
+
+        .team-tag {
+            background: var(--mint-light);
+            color: var(--mint-hover);
+            padding: 10px 14px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            border-left: 3px solid var(--mint-deep);
+        }
+
+        .team-tag svg {
+            width: 16px;
+            height: 16px;
+            flex-shrink: 0;
+        }
+
+        /* --- Кнопка наверх --- */
+        .scroll-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background-color: var(--mint-deep);
+            color: var(--white);
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(102, 205, 170, 0.4);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px);
+            transition: all 0.3s ease;
+            z-index: 999;
+        }
+
+        .scroll-to-top.show {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .scroll-to-top:hover {
+            background-color: var(--mint-hover);
+            transform: translateY(-4px);
+        }
+
+        /* --- Футер --- */
+        footer {
+            padding: 40px 0;
+            border-top: 1px solid var(--mint-soft);
+            text-align: center;
+            font-size: 0.85rem;
+            color: var(--grey-light);
+            margin-top: 20px;
+        }
+
+        /* ================= АДАПТИВ ================= */
+        @media (max-width: 900px) {
+            .team-grid {
+                grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+                gap: 24px;
+            }
+        }
+
+        @media (max-width: 700px) {
+            .container { padding: 0 16px; }
+        }
+
+        @media (max-width: 600px) {
+            .header-inner { 
+                flex-wrap: nowrap; 
+                gap: 8px;
+                justify-content: space-between;
+            }
+            
+            .header-right { gap: 8px; }
+            .logo { font-size: 0; gap: 0; }
+            .logo img { height: 35px; }
+
+            .btn {
+                padding: 9px 14px;
+                font-size: 0.8rem;
+                white-space: nowrap;
+            }
+
+            .scroll-to-top { 
+                bottom: 20px; 
+                right: 20px; 
+                width: 42px; 
+                height: 42px; 
+            }
+
+            /* На телефонах делаем по 1 карточке в ряд для читаемости текста */
+            .team-grid {
+                grid-template-columns: 1fr;
+                gap: 24px;
+            }
+
+            .team-info { padding: 20px; }
+            .team-name { font-size: 1.15rem; }
+        }
+
+        @media (max-width: 380px) {
+            .btn { padding: 8px 10px; font-size: 0.75rem; }
+            .header-right { gap: 4px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Шапка -->
+    <header>
+        <div class="container header-inner">
+            <a href="index.html" class="logo">
+                <img src="images/logo.png" alt="Логотип KATRIN_LASER">
+                KATRIN<span>_LASER</span>
+            </a>
+            <div class="header-right">
+                <a href="index.html" class="btn btn-back">← На главную</a>
+                <a href="https://n1208838.yclients.com/" target="_blank" rel="noopener" class="btn btn-primary">Записаться</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Заголовок страницы -->
+    <section class="page-header container">
+        <div class="subtitle">Наши специалисты</div>
+        <h1>Команда студии</h1>
+        <p class="lead-text">
+            Профессионалы своего дела, которые позаботятся о вашей красоте и безопасности. Индивидуальный подход к каждому клиенту.
+        </p>
+    </section>
+
+    <!-- Сетка команды -->
+    <section class="container">
+        <div class="team-grid">
+
+            <!-- Сотрудник 1 -->
+            <div class="team-card">
+                <div class="team-photo">
+                    <img src="images/team1.jpg" alt="Фото Ольги Осиповой">
+                </div>
+                <div class="team-info">
+                    <div class="team-name">Ольга Осипова</div>
+                    <!--<div class="team-role">Врач-косметолог</div>-->
+                    
+                    <p class="team-desc">
+                        Глубоко разбирается в физиологии кожи, работает с любыми зонами и сложными случаями, обеспечивая деликатный и заметный результат.
+                    </p>
+                    
+                    <div class="team-tags">
+                        <div class="team-tag">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                            Высшее медицинское образование
+                        </div>
+                        <div class="team-tag">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="7"></circle><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline></svg>
+                            Сертификат междунар. образца
+                        </div>
+                        <div class="team-tag">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                            В студии с августа 2023
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Сотрудник 2 -->
+            <div class="team-card">
+                <div class="team-photo">
+                    <img src="images/team2.jpg" alt="Фото Ольги Смирновой">
+                </div>
+                <div class="team-info">
+                    <div class="team-name">Ольга Смирнова</div>
+                  <!--  <div class="team-role">Мастер лазерной эпиляции</div> -->
+                    
+                    <p class="team-desc">
+                        Внимательно относится к особенностям кожи каждого клиента, подбирая индивидуальный протокол для максимальной безопасности и комфорта.
+                    </p>
+                    
+                    <div class="team-tags">
+                        <div class="team-tag">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                            Медицинское образование
+                        </div>
+                        <div class="team-tag">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="7"></circle><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline></svg>
+                            Диплом косметолога-эстетиста
+                        </div>
+                        <div class="team-tag">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                            В студии с августа 2025
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Сотрудник 3 -->
+            <div class="team-card">
+                <div class="team-photo">
+                    <img src="images/team3.jpg" alt="Фото Анастасии Виноградовой">
+                </div>
+                <div class="team-info">
+                    <div class="team-name">Анастасия Виноградова</div>
+                 <!--   <div class="team-role">Косметолог-эстетист</div> -->
+                    
+                    <p class="team-desc">
+                        Профессионально подбирает параметры аппарата под тип кожи, помогая избавиться от нежелательных волос бережно и эффективно.
+                    </p>
+                    
+                    <div class="team-tags">
+                        <div class="team-tag">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                            Диплом косметолога-эстетиста
+                        </div>
+                        <div class="team-tag">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="7"></circle><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline></svg>
+                            Сертификат междунар. образца
+                        </div>
+                        <div class="team-tag">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                            В студии с июня 2025
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Сотрудник 4 -->
+            <div class="team-card">
+                <div class="team-photo">
+                    <img src="images/team4.jpg" alt="Фото Анны Зайцевой">
+                </div>
+                <div class="team-info">
+                    <div class="team-name">Анна Зайцева</div>
+                 <!--   <div class="team-role">Косметолог-эстетист</div>  -->
+                    
+                    <p class="team-desc">
+                        Отличается безупречным вниманием к деталям и комфорту клиента. Владеет современными протоколами лазерной эпиляции.
+                    </p>
+                    
+                    <div class="team-tags">
+                        <div class="team-tag">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                            Диплом косметолога-эстетиста
+                        </div>
+                        <div class="team-tag">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="7"></circle><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline></svg>
+                            Сертификат междунар. образца
+                        </div>
+                        <div class="team-tag">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                            В студии с января 2025
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Футер -->
+    <footer>
+        <div class="container">
+            <p>© 2026 KATRIN_LASER · Студия эпиляции в Твери</p>
+        </div>
+    </footer>
+
+    <!-- Кнопка Наверх -->
+    <button id="scrollToTopBtn" class="scroll-to-top" aria-label="Наверх">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 19V5M12 5L5 12M12 5L19 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+    </button>
+
+    <!-- Скрипт для кнопки Наверх -->
+    <script>
+        const scrollToTopBtn = document.getElementById('scrollToTopBtn');
+        
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                scrollToTopBtn.classList.add('show');
+            } else {
+                scrollToTopBtn.classList.remove('show');
+            }
+        });
+
+        scrollToTopBtn.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+    </script>
+
+</body>
+</html>
