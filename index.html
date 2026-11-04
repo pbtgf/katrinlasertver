@@ -389,6 +389,108 @@
             z-index: 2;
         }
 
+        /* --- Блок Преимущества --- */
+        .benefits-section {
+            padding: 40px 0;
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 24px;
+            margin-top: 30px;
+        }
+
+        .benefit-card {
+            background: var(--white);
+            border-radius: 16px;
+            padding: 28px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--mint-soft);
+            border-left: 4px solid var(--mint-deep); /* Мятная полоска слева */
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+            transition: transform 0.3s ease;
+        }
+
+        .benefit-card:hover {
+            transform: translateY(-4px);
+        }
+
+        .benefit-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 24px;
+            height: 24px;
+            flex-shrink: 0;
+            color: var(--mint-hover);
+            margin-top: 4px;
+        }
+
+        .benefit-text {
+            font-size: 1rem;
+            color: var(--grey-text);
+            line-height: 1.5;
+        }
+
+        /* --- Блок Воронка (CTA) --- */
+        .cta-funnel {
+            padding: 20px 0 40px;
+        }
+
+        .cta-box {
+            background: linear-gradient(135deg, var(--mint-light) 0%, var(--white) 100%);
+            border: 2px solid var(--mint-soft);
+            border-radius: var(--radius);
+            padding: 60px 40px;
+            text-align: center;
+            box-shadow: var(--shadow);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Легкий декоративный элемент на фоне */
+        .cta-box::before {
+            content: "";
+            position: absolute;
+            top: -50px;
+            right: -50px;
+            width: 150px;
+            height: 150px;
+            background: var(--mint-deep);
+            opacity: 0.1;
+            border-radius: 50%;
+        }
+
+        .cta-box h2 {
+            font-size: clamp(1.8rem, 3vw, 2.4rem);
+            color: #2c3e35;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .cta-box p {
+            font-size: 1.1rem;
+            color: var(--grey-text);
+            max-width: 800px;
+            margin: 0 auto 30px;
+            line-height: 1.7;
+            position: relative;
+        }
+
+        .cta-box strong {
+            color: var(--mint-hover);
+            font-weight: 600;
+        }
+
+        .btn-large {
+            padding: 16px 48px;
+            font-size: 1.05rem;
+            position: relative;
+        }
+
         /* --- Секция Контакты --- */
         .contacts {
             display: flex;
@@ -553,7 +655,7 @@
         /* Мобильные: сохраняем hero в одну строку */
         @media (max-width: 900px) {
             .container {
-                padding: 0 20px; /* Увеличили боковые отступы, чтобы текст не прилипал */
+                padding: 0 20px; 
             }
 
             .hero {
@@ -566,13 +668,13 @@
             .hero-content {
                 flex: 1.1;
                 min-width: 0;
-                padding-left: 4px; /* Дополнительный отступ для текста */
+                padding-left: 4px; 
             }
 
             .hero-desc {
                 font-size: 0.95rem;
                 margin-bottom: 1.4rem;
-                max-width: 100%; /* Текст заполняет блок равномерно */
+                max-width: 100%; 
             }
 
             h1 {
@@ -604,6 +706,11 @@
             .salon-gallery {
                 grid-template-columns: 1fr 1fr;
                 gap: 14px;
+            }
+            
+            /* Преимущества */
+            .benefits-grid {
+                grid-template-columns: 1fr;
             }
         }
 
@@ -646,7 +753,7 @@
 
             .hero-content {
                 flex: 1.15;
-                padding-left: 6px; /* Чуть больше отступа для маленьких экранов */
+                padding-left: 6px; 
             }
 
             .hero-image {
@@ -680,6 +787,26 @@
                 width: 42px;
                 height: 42px;
             }
+            
+            .benefit-card {
+                padding: 20px;
+            }
+
+            /* Воронка на телефоне */
+            .cta-box {
+                padding: 40px 20px;
+            }
+            .cta-box h2 {
+                font-size: 1.5rem;
+            }
+            .cta-box p {
+                font-size: 1rem;
+            }
+            .btn-large {
+                padding: 14px 24px;
+                font-size: 0.95rem;
+                width: 100%;
+            }
         }
 
         /* Очень узкие экраны */
@@ -703,6 +830,7 @@
             <div class="header-right">
                 <div class="nav-links">
                     <a href="#about">О студии</a>
+                    <a href="#benefits">Преимущества</a>
                     <a href="#contacts">Контакты</a>
                 </div>
 
@@ -713,13 +841,15 @@
                     </button>
                     <div class="dropdown-menu" role="menu">
                         <a href="#about" role="menuitem">О студии</a>
+                        <a href="guide.html" role="menuitem">Личный проводник в гладкость</a>
+                        <a href="#benefits" role="menuitem">Преимущества</a>
                         <a href="services.html" role="menuitem">Услуги</a>
                         <a href="team.html" role="menuitem">Мастера</a>
                         <a href="recommendations.html" role="menuitem">Рекомендации до/после</a>
                         <a href="preparation.html" role="menuitem">Процедуры / Подготовка</a>
                         <a href="tattoo.html" role="menuitem">Удаление тату / татуажа</a>
                         <a href="contraindications.html" role="menuitem">Противопоказания</a>
-                        <a href="guide.html" role="menuitem">Гайд</a>
+                        
                         <a href="gallery.html" role="menuitem">Галерея</a>
                         
                         <a href="#contacts" role="menuitem">Контакты</a>
@@ -772,6 +902,91 @@
             <div class="salon-photo">
                 <img src="images/salon2.jpg" alt="Фото салона 2">
             </div>
+        </div>
+    </section>
+
+    <!-- Блок Преимущества -->
+    <section id="benefits" class="benefits-section container fade-in-section">
+        <div class="about-content" style="margin-bottom: 30px;">
+            <div class="subtitle">Почему мы</div>
+            <h2>Наши преимущества</h2>
+        </div>
+
+        <div class="benefits-grid">
+            <!-- Карточка 1 -->
+            <div class="benefit-card">
+                <span class="benefit-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                </span>
+                <div class="benefit-text">Все мастера имеют дипломы косметологов-эстетистов, медицинское образование и международные сертификаты.</div>
+            </div>
+
+            <!-- Карточка 2 -->
+            <div class="benefit-card">
+                <span class="benefit-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                </span>
+                <div class="benefit-text">Обучение проходило у врача-хирурга, кандидата наук, преподающего в Национальном Лазерном Институте в США.</div>
+            </div>
+
+            <!-- Карточка 3 -->
+            <div class="benefit-card">
+                <span class="benefit-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                </span>
+                <div class="benefit-text">Более 1500 счастливых клиенток и ни одного плохого отзыва.</div>
+            </div>
+
+            <!-- Карточка 4 -->
+            <div class="benefit-card">
+                <span class="benefit-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                </span>
+                <div class="benefit-text">Аппараты последнего поколения эффективны, с самой мощной системой охлаждения дают гарантированный результат.</div>
+            </div>
+
+            <!-- Карточка 5 -->
+            <div class="benefit-card">
+                <span class="benefit-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                </span>
+                <div class="benefit-text">Всегда чистый результат без вросших волос и покраснений.</div>
+            </div>
+
+            <!-- Карточка 6 -->
+            <div class="benefit-card">
+                <span class="benefit-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                </span>
+                <div class="benefit-text">Уже после первой процедуры пропадает раздражение, дискомфорт, уходит большая часть проблем.</div>
+            </div>
+
+            <!-- Карточка 7 -->
+            <div class="benefit-card">
+                <span class="benefit-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                </span>
+                <div class="benefit-text">100% эффективность – примерно 30% волос уходит уже после первого сеанса.</div>
+            </div>
+
+            <!-- Карточка 8 -->
+            <div class="benefit-card">
+                <span class="benefit-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                </span>
+                <div class="benefit-text">С нами не страшно. Даже девчонки, которым делали александритовую эпиляцию или лазер на высоких мощностях, кому нанесли ожоги, ходят к нам с удовольствием!</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Блок Воронка (CTA) -->
+    <section class="cta-funnel container fade-in-section">
+        <div class="cta-box">
+            <h2>Устали от бритья и постоянного раздражения на коже?</h2>
+            <p>
+                Мы готовы провести подробную полноценную консультацию с <strong>бесплатной процедурой подмышечных впадин</strong>, чтобы вы смогли почувствовать на себе результат, узнать, какие ощущения на процедуре, познакомиться с мастером и получить ответы на все интересующие вопросы.
+            </p>
+            <a href="https://n1208838.yclients.com/" target="_blank" rel="noopener" class="btn btn-primary btn-large">Записаться на бесплатную процедуру</a>
         </div>
     </section>
 
