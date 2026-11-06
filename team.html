@@ -8,18 +8,22 @@
     <link rel="icon" href="images/favicon.png" type="image/png">
     <link rel="apple-touch-icon" href="images/favicon.png">
     <style>
-        /* --- Цветовая палитра --- */
+        /* --- Новая цветовая палитра: Небесно-голубой / Беж / Темно-серый --- */
         :root {
-            --mint-light: #e3f0e9;
-            --mint-soft: #c1d5c9;
-            --mint-deep: #66CDAA;
-            --mint-hover: #4A9E82;
-            --beige-bg: #faf7f2;
+            --mint-light: #e8f7fb;       /* Очень светлый голубой для карточек/фонов */
+            --mint-soft: #bceafb;        /* Мягкий голубой для рамок и разделителей */
+            --mint-deep: #8ee8fb;        /* Ваш основной цвет (кнопки, акценты) */
+            --mint-hover: #5bc6da;       /* Цвет при наведении (темнее, бирюзовый оттенок) */
+            --text-on-mint: #0e4f52;     /* Темный текст для светлых кнопок */
+            --accent-dark: #1a8b8e;      /* Темный бирюзовый для текста и иконок */
+            
+            --beige-bg: #faf7f2;         /* Теплый бежевый фон сайта */
             --beige-card: #f2ede4;
-            --grey-text: #4a4a4a;
-            --grey-light: #9b9b9b;
+            --grey-text: #3a3a3a;        /* Темно-серый текст */
+            --grey-light: #7a7a7a;       /* Светло-серый текст */
             --white: #ffffff;
-            --shadow: 0 10px 30px rgba(110, 143, 126, 0.08);
+            
+            --shadow: 0 10px 30px rgba(142, 232, 251, 0.2);
             --radius: 20px;
             --font-main: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
         }
@@ -65,7 +69,7 @@
             font-size: 1.2rem;
             font-weight: 600;
             letter-spacing: 0.05em;
-            color: #2c3e35;
+            color: #1e2a2b;
             display: flex;
             align-items: center;
             gap: 10px;
@@ -73,7 +77,7 @@
         }
 
         .logo img { height: 45px; width: auto; object-fit: contain; }
-        .logo span { color: var(--mint-hover); font-weight: 400; }
+        .logo span { color: var(--accent-dark); font-weight: 400; }
 
         .header-right {
             display: flex;
@@ -97,13 +101,14 @@
 
         .btn-primary {
             background-color: var(--mint-deep);
-            color: var(--white);
-            box-shadow: 0 4px 15px rgba(102, 205, 170, 0.3);
+            color: var(--text-on-mint);
+            box-shadow: 0 4px 15px rgba(142, 232, 251, 0.4);
         }
 
         .btn-primary:hover {
             background-color: var(--mint-hover);
             transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(91, 198, 218, 0.5);
         }
 
         .btn-back {
@@ -124,7 +129,7 @@
             font-size: clamp(2.2rem, 4vw, 3.2rem); 
             font-weight: 400;
             letter-spacing: -0.02em;
-            color: #2c3e35;
+            color: #1e2a2b;
             margin-bottom: 1rem;
         }
 
@@ -132,7 +137,7 @@
             font-size: 0.9rem;
             text-transform: uppercase;
             letter-spacing: 0.15em;
-            color: var(--mint-hover);
+            color: var(--accent-dark);
             font-weight: 600;
             margin-bottom: 0.8rem;
         }
@@ -167,7 +172,7 @@
 
         .team-card:hover {
             transform: translateY(-6px);
-            box-shadow: 0 15px 35px rgba(110, 143, 126, 0.15);
+            box-shadow: 0 15px 35px rgba(142, 232, 251, 0.3);
         }
 
         .team-photo {
@@ -200,14 +205,14 @@
         .team-name {
             font-size: 1.25rem;
             font-weight: 600;
-            color: #2c3e35;
+            color: #1e2a2b;
             margin-bottom: 4px;
             letter-spacing: -0.01em;
         }
 
         .team-role {
             font-size: 0.85rem;
-            color: var(--mint-hover);
+            color: var(--accent-dark);
             font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 0.05em;
@@ -233,7 +238,7 @@
 
         .team-tag {
             background: var(--mint-light);
-            color: var(--mint-hover);
+            color: var(--accent-dark);
             padding: 10px 14px;
             border-radius: 12px;
             font-size: 0.8rem;
@@ -259,13 +264,13 @@
             height: 48px;
             border-radius: 50%;
             background-color: var(--mint-deep);
-            color: var(--white);
+            color: var(--text-on-mint);
             border: none;
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            box-shadow: 0 4px 15px rgba(102, 205, 170, 0.4);
+            box-shadow: 0 4px 15px rgba(142, 232, 251, 0.5);
             opacity: 0;
             visibility: hidden;
             transform: translateY(20px);
@@ -395,7 +400,7 @@
                         </div>
                         <div class="team-tag">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="7"></circle><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline></svg>
-                            Сертификат междунар. образца
+                            Сертификат международного образца
                         </div>
                         <div class="team-tag">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
@@ -425,7 +430,7 @@
                         </div>
                         <div class="team-tag">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="7"></circle><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline></svg>
-                            Диплом косметолога-эстетиста
+                            Диплом косметика-эстетиста
                         </div>
                         <div class="team-tag">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
@@ -451,11 +456,11 @@
                     <div class="team-tags">
                         <div class="team-tag">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
-                            Диплом косметолога-эстетиста
+                            Диплом косметика-эстетиста
                         </div>
                         <div class="team-tag">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="7"></circle><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline></svg>
-                            Сертификат междунар. образца
+                            Сертификат международного образца
                         </div>
                         <div class="team-tag">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
@@ -481,11 +486,11 @@
                     <div class="team-tags">
                         <div class="team-tag">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
-                            Диплом косметолога-эстетиста
+                            Диплом косметика-эстетиста
                         </div>
                         <div class="team-tag">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="7"></circle><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline></svg>
-                            Сертификат междунар. образца
+                            Сертификат международного образца
                         </div>
                         <div class="team-tag">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>

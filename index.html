@@ -8,18 +8,22 @@
     <link rel="icon" href="images/favicon.png" type="image/png">
     <link rel="apple-touch-icon" href="images/favicon.png">
     <style>
-        /* --- Цветовая палитра: Мята / Беж / Серый --- */
+        /* --- Цветовая палитра: Небесно-голубой / Беж / Темно-серый --- */
         :root {
-            --mint-light: #e3f0e9;
-            --mint-soft: #c1d5c9;
-            --mint-deep: #66CDAA;
-            --mint-hover: #4A9E82;
-            --beige-bg: #faf7f2;
+            --mint-light: #e8f7fb;       /* Очень светлый голубой для карточек/фонов */
+            --mint-soft: #bceafb;        /* Мягкий голубой для рамок и разделителей */
+            --mint-deep: #8ee8fb;        /* Ваш основной цвет (кнопки, акценты) */
+            --mint-hover: #5bc6da;       /* Цвет при наведении (темнее, бирюзовый оттенок) */
+            --text-on-mint: #0e4f52;     /* Темный текст для светлых кнопок */
+            --accent-dark: #1a8b8e;      /* Темный бирюзовый для текста и иконок */
+            
+            --beige-bg: #faf7f2;         /* Теплый бежевый фон сайта */
             --beige-card: #f2ede4;
-            --grey-text: #4a4a4a;
-            --grey-light: #9b9b9b;
+            --grey-text: #3a3a3a;        /* Темно-серый текст */
+            --grey-light: #7a7a7a;       /* Светло-серый текст */
             --white: #ffffff;
-            --shadow: 0 10px 30px rgba(110, 143, 126, 0.08);
+            
+            --shadow: 0 10px 30px rgba(142, 232, 251, 0.25);
             --radius: 20px;
             --font-main: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
         }
@@ -71,7 +75,7 @@
         h1, h2, h3 {
             font-weight: 400;
             letter-spacing: -0.02em;
-            color: #2c3e35;
+            color: #1e2a2b;
         }
 
         h1 {
@@ -89,7 +93,7 @@
             font-size: 0.9rem;
             text-transform: uppercase;
             letter-spacing: 0.15em;
-            color: var(--mint-hover);
+            color: var(--accent-dark);
             font-weight: 600;
             margin-bottom: 0.8rem;
         }
@@ -108,25 +112,25 @@
 
         .btn-primary {
             background-color: var(--mint-deep);
-            color: var(--white);
-            box-shadow: 0 4px 15px rgba(102, 205, 170, 0.3);
+            color: var(--text-on-mint);
+            box-shadow: 0 4px 15px rgba(142, 232, 251, 0.4);
         }
 
         .btn-primary:hover {
             background-color: var(--mint-hover);
             transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(74, 158, 130, 0.4);
+            box-shadow: 0 8px 25px rgba(91, 198, 218, 0.5);
         }
 
         .btn-outline {
             background: transparent;
-            border: 1px solid var(--mint-deep);
-            color: var(--mint-hover);
+            border: 2px solid var(--mint-hover);
+            color: var(--accent-dark);
         }
 
         .btn-outline:hover {
             background: var(--mint-light);
-            border-color: var(--mint-hover);
+            border-color: var(--accent-dark);
         }
 
         /* --- Шапка --- */
@@ -151,7 +155,7 @@
             font-size: 1.2rem;
             font-weight: 600;
             letter-spacing: 0.05em;
-            color: #2c3e35;
+            color: #1e2a2b;
             display: flex;
             align-items: center;
             gap: 10px;
@@ -165,7 +169,7 @@
         }
 
         .logo span {
-            color: var(--mint-hover);
+            color: var(--accent-dark);
             font-weight: 400;
         }
 
@@ -184,10 +188,10 @@
         }
 
         .nav-links a:hover {
-            color: var(--mint-hover);
+            color: var(--accent-dark);
         }
 
-        /* Выпадающее меню */
+        /* ================= ОФОРМЛЕНИЕ КНОПКИ МЕНЮ ================= */
         .dropdown {
             position: relative;
         }
@@ -212,16 +216,24 @@
             background: var(--mint-light);
         }
 
+        /* Аккуратная SVG-стрелочка (контурная галочка) */
         .dropdown-toggle .arrow {
             display: inline-block;
-            font-size: 0.65rem;
-            transition: transform 0.25s ease;
+            transition: transform 0.25s ease, color 0.25s ease;
+            color: var(--accent-dark);
+            width: 10px;
+            height: 10px;
+        }
+
+        .dropdown-toggle:hover .arrow {
             color: var(--mint-hover);
         }
 
+        /* Плавный поворот на 180 градусов */
         .dropdown.open .dropdown-toggle .arrow {
             transform: rotate(180deg);
         }
+        /* ========================================================== */
 
         .dropdown-menu {
             position: absolute;
@@ -230,7 +242,7 @@
             min-width: 260px;
             background: var(--white);
             border-radius: 16px;
-            box-shadow: 0 20px 50px rgba(110, 143, 126, 0.15);
+            box-shadow: 0 20px 50px rgba(26, 139, 142, 0.15);
             border: 1px solid var(--mint-soft);
             padding: 10px;
             opacity: 0;
@@ -257,7 +269,7 @@
 
         .dropdown-menu a:hover {
             background: var(--mint-light);
-            color: var(--mint-hover);
+            color: var(--accent-dark);
         }
 
         .dropdown-menu a + a {
@@ -284,7 +296,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            color: var(--mint-hover);
+            color: var(--accent-dark);
             font-size: 1.1rem;
             font-weight: 300;
             box-shadow: var(--shadow);
@@ -351,10 +363,10 @@
         /* Сетка для фото салона (ВЕРТИКАЛЬНЫЕ) */
         .salon-gallery {
             display: grid;
-            grid-template-columns: 1fr 1fr; /* Две колонки */
+            grid-template-columns: 1fr 1fr;
             gap: 24px;
             margin-bottom: 40px;
-            max-width: 800px; /* Ограничили ширину, чтобы фото не были гигантскими */
+            max-width: 800px;
             margin-left: auto;
             margin-right: auto;
         }
@@ -362,12 +374,12 @@
         .salon-photo {
             border-radius: var(--radius);
             overflow: hidden;
-            aspect-ratio: 3 / 4; /* Задаем вертикальные пропорции (ширина / высота) */
+            aspect-ratio: 3 / 4;
             background: linear-gradient(135deg, var(--mint-light) 0%, var(--beige-card) 100%);
             display: flex;
             align-items: center;
             justify-content: center;
-            color: var(--mint-hover);
+            color: var(--accent-dark);
             font-size: 1rem;
             font-weight: 300;
             box-shadow: var(--shadow);
@@ -407,7 +419,7 @@
             padding: 28px;
             box-shadow: var(--shadow);
             border: 1px solid var(--mint-soft);
-            border-left: 4px solid var(--mint-deep); /* Мятная полоска слева */
+            border-left: 4px solid var(--mint-deep);
             display: flex;
             align-items: flex-start;
             gap: 16px;
@@ -425,7 +437,7 @@
             width: 24px;
             height: 24px;
             flex-shrink: 0;
-            color: var(--mint-hover);
+            color: var(--accent-dark);
             margin-top: 4px;
         }
 
@@ -451,7 +463,6 @@
             overflow: hidden;
         }
 
-        /* Легкий декоративный элемент на фоне */
         .cta-box::before {
             content: "";
             position: absolute;
@@ -460,13 +471,13 @@
             width: 150px;
             height: 150px;
             background: var(--mint-deep);
-            opacity: 0.1;
+            opacity: 0.2;
             border-radius: 50%;
         }
 
         .cta-box h2 {
             font-size: clamp(1.8rem, 3vw, 2.4rem);
-            color: #2c3e35;
+            color: #1e2a2b;
             margin-bottom: 20px;
             position: relative;
         }
@@ -481,7 +492,7 @@
         }
 
         .cta-box strong {
-            color: var(--mint-hover);
+            color: var(--accent-dark);
             font-weight: 600;
         }
 
@@ -489,6 +500,34 @@
             padding: 16px 48px;
             font-size: 1.05rem;
             position: relative;
+        }
+
+        .cta-actions {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 24px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .cta-questions {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .questions-text {
+            font-size: 1.05rem;
+            color: var(--grey-text);
+            font-weight: 500;
+        }
+        
+        .cta-questions .btn-outline {
+            padding: 16px 48px;
+            font-size: 1.05rem;
         }
 
         /* --- Секция Контакты --- */
@@ -515,14 +554,14 @@
             font-size: 0.8rem;
             text-transform: uppercase;
             letter-spacing: 0.1em;
-            color: var(--mint-hover);
+            color: var(--accent-dark);
             font-weight: 600;
             margin-bottom: 4px;
         }
 
         .contact-item .value {
             font-size: 1.1rem;
-            color: #2c3e35;
+            color: #1e2a2b;
         }
 
         .contact-item .value a {
@@ -531,10 +570,9 @@
         }
 
         .contact-item .value a:hover {
-            border-color: var(--mint-hover);
+            border-color: var(--mint-deep);
         }
 
-        /* Оформление адресов */
         .address-list {
             display: flex;
             flex-direction: column;
@@ -547,13 +585,13 @@
             padding: 16px 20px;
             border-radius: 12px;
             border-left: 3px solid var(--mint-deep);
-            box-shadow: 0 4px 15px rgba(110, 143, 126, 0.05);
+            box-shadow: 0 4px 15px rgba(142, 232, 251, 0.1);
         }
 
         .address-title {
             font-size: 1.05rem;
             font-weight: 600;
-            color: #2c3e35;
+            color: #1e2a2b;
             margin-bottom: 4px;
         }
 
@@ -574,7 +612,7 @@
         }
 
         .address-services strong {
-            color: var(--mint-hover);
+            color: var(--accent-dark);
         }
 
         /* --- Карта --- */
@@ -609,13 +647,13 @@
             height: 48px;
             border-radius: 50%;
             background-color: var(--mint-deep);
-            color: var(--white);
+            color: var(--text-on-mint);
             border: none;
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            box-shadow: 0 4px 15px rgba(102, 205, 170, 0.4);
+            box-shadow: 0 4px 15px rgba(142, 232, 251, 0.5);
             opacity: 0;
             visibility: hidden;
             transform: translateY(20px);
@@ -632,7 +670,7 @@
         .scroll-to-top:hover {
             background-color: var(--mint-hover);
             transform: translateY(-4px);
-            box-shadow: 0 6px 20px rgba(74, 158, 130, 0.5);
+            box-shadow: 0 6px 20px rgba(91, 198, 218, 0.6);
         }
 
         /* --- Футер --- */
@@ -652,7 +690,6 @@
             }
         }
 
-        /* Мобильные: сохраняем hero в одну строку */
         @media (max-width: 900px) {
             .container {
                 padding: 0 20px; 
@@ -689,7 +726,6 @@
                 max-width: 46%;
             }
 
-            /* Контакты — в колонку */
             .contacts {
                 flex-direction: column;
                 gap: 40px;
@@ -702,19 +738,16 @@
                 margin: 30px auto 0;
             }
 
-            /* Фото салона — две рядом */
             .salon-gallery {
                 grid-template-columns: 1fr 1fr;
                 gap: 14px;
             }
             
-            /* Преимущества */
             .benefits-grid {
                 grid-template-columns: 1fr;
             }
         }
 
-        /* Телефоны */
         @media (max-width: 600px) {
             .header-inner {
                 flex-wrap: nowrap;
@@ -745,7 +778,6 @@
             .logo { font-size: 1rem; gap: 8px; }
             .logo img { height: 35px; }
 
-            /* hero: текст и фото рядом, кнопка под текстом */
             .hero {
                 gap: 14px;
                 padding: 24px 0 40px;
@@ -771,7 +803,6 @@
                 display: inline-block;
             }
 
-            /* Фото салона — две рядом */
             .salon-gallery {
                 grid-template-columns: 1fr 1fr;
                 gap: 10px;
@@ -792,7 +823,6 @@
                 padding: 20px;
             }
 
-            /* Воронка на телефоне */
             .cta-box {
                 padding: 40px 20px;
             }
@@ -807,9 +837,21 @@
                 font-size: 0.95rem;
                 width: 100%;
             }
+            
+            .cta-questions {
+                flex-direction: column;
+                gap: 12px;
+            }
+            .questions-text {
+                font-size: 1rem;
+            }
+            .cta-questions .btn-outline {
+                padding: 14px 24px;
+                font-size: 0.95rem;
+                width: 100%;
+            }
         }
 
-        /* Очень узкие экраны */
         @media (max-width: 380px) {
             .hero-image {
                 max-width: 40%;
@@ -837,7 +879,9 @@
                 <div class="dropdown" id="dropdown">
                     <button class="dropdown-toggle" type="button" aria-expanded="false" aria-haspopup="true">
                         Меню
-                        <span class="arrow">▼</span>
+                        <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="6 9 12 15 18 9"></polyline>
+                        </svg>
                     </button>
                     <div class="dropdown-menu" role="menu">
                         <a href="#about" role="menuitem">О студии</a>
@@ -918,7 +962,7 @@
                 <span class="benefit-icon">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
                 </span>
-                <div class="benefit-text">Все мастера имеют дипломы косметологов-эстетистов, медицинское образование и международные сертификаты.</div>
+                <div class="benefit-text">Все мастера имеют дипломы косметиков-эстетистов и международные сертификаты.</div>
             </div>
 
             <!-- Карточка 2 -->
@@ -926,7 +970,7 @@
                 <span class="benefit-icon">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
                 </span>
-                <div class="benefit-text">Обучение проходило у врача-хирурга, кандидата наук, преподающего в Национальном Лазерном Институте в США.</div>
+                <div class="benefit-text">Обучение проходили у врача-хирурга, кандидата наук, преподающего в Национальном Лазерном Институте в США.</div>
             </div>
 
             <!-- Карточка 3 -->
@@ -934,7 +978,7 @@
                 <span class="benefit-icon">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
                 </span>
-                <div class="benefit-text">Более 1500 счастливых клиенток и ни одного плохого отзыва.</div>
+                <div class="benefit-text">Более 1500 счастливых клиентов и клиенток и ни одного плохого отзыва.</div>
             </div>
 
             <!-- Карточка 4 -->
@@ -986,7 +1030,15 @@
             <p>
                 Мы готовы провести подробную полноценную консультацию с <strong>бесплатной процедурой подмышечных впадин</strong>, чтобы вы смогли почувствовать на себе результат, узнать, какие ощущения на процедуре, познакомиться с мастером и получить ответы на все интересующие вопросы.
             </p>
-            <a href="https://n1208838.yclients.com/" target="_blank" rel="noopener" class="btn btn-primary btn-large">Записаться на бесплатную процедуру</a>
+            
+            <div class="cta-actions">
+                <a href="https://n1208838.yclients.com/" target="_blank" rel="noopener" class="btn btn-primary btn-large">Записаться на бесплатную процедуру</a>
+                
+                <div class="cta-questions">
+                    <span class="questions-text">Остались вопросы?</span>
+                    <a href="https://vk.me/katrin__laser_tver" target="_blank" rel="noopener" class="btn btn-outline btn-large">Напишите нам</a>
+                </div>
+            </div>
         </div>
     </section>
 
