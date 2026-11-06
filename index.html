@@ -15,7 +15,7 @@
             --mint-deep: #8ee8fb;        /* Ваш основной цвет (кнопки, акценты) */
             --mint-hover: #5bc6da;       /* Цвет при наведении (темнее, бирюзовый оттенок) */
             --text-on-mint: #0e4f52;     /* Темный текст для светлых кнопок */
-            --accent-dark: #1a8b8e;      /* Темный бирюзовый для текста и иконок */
+            --accent-dark: #4db8cc;      /* Темный бирюзовый для текста и иконок */
             
             --beige-bg: #faf7f2;         /* Теплый бежевый фон сайта */
             --beige-card: #f2ede4;
@@ -604,7 +604,7 @@
 
         .address-services {
             font-size: 0.85rem;
-            color: var(--grey-text);
+            color: var(--grey-text); /* Вернули прежний цвет текста */
             background: var(--mint-light);
             padding: 8px 12px;
             border-radius: 8px;
@@ -612,7 +612,8 @@
         }
 
         .address-services strong {
-            color: var(--accent-dark);
+            color: #1a8b8e; /* Надпись "Доступные услуги:" темно-бирюзовым */
+            font-weight: 600;
         }
 
         /* --- Карта --- */
